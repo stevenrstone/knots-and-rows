@@ -31,6 +31,7 @@ const Dropdown = ({ title, container, children }) => {
 
   const ListItem = styled('li')`
     margin: 0.5rem 0;
+    white-space: nowrap;
 
     a {
       padding: 0.5rem 0;
@@ -55,7 +56,10 @@ const Dropdown = ({ title, container, children }) => {
     }
   };
 
-  const renderChildren = () => children.map((child, index) => <ListItem key={index}>{child}</ListItem>);
+  const renderChildren = () => children.map((child, index) => {
+    console.log(child, index);
+    return <ListItem key={index}>{child}</ListItem>;
+  });
 
   return (
     <React.Fragment>

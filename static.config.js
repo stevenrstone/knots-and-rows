@@ -17,7 +17,6 @@ export default {
     allProducts.forEach((product) => {
       types.add(product.handle);
     });
-    console.log(types);
     const productPaths = [];
     types.forEach((handle) => {
       productPaths.push({
@@ -40,6 +39,7 @@ export default {
         getData: () => ({
           allProducts,
           pageType: 'Tonals',
+          types: allProducts.map(product => product.handle),
         }),
       },
       ...productPaths,

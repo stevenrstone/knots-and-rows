@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouteData } from 'react-static';
 import styled from 'react-emotion';
 import Dropdown from './dropdown';
 import StyledLink from './styled-link';
@@ -11,19 +12,23 @@ const Nav = styled('nav')`
   width: 100%;
 `;
 
-const RenderedNav = () => (
+const NavLink = styled(StyledLink)`
+  display: block;
+  white-space: ;
+`;
+
+export default withRouteData(props => (
   <Nav>
     <StyledLink to="/">Home</StyledLink>
     <Dropdown
       title="Shop"
       container={typeof document !== 'undefined' ? document.body : null}
     >
-      <StyledLink to="/shop/tonals">Tonals</StyledLink>
-      <StyledLink to="/shop/speckles">Speckles</StyledLink>
-      <StyledLink to="/shop/kits">Kits</StyledLink>
-      <StyledLink to="/shop/lumos">Lumos</StyledLink>
-      <StyledLink to="/shop/specials">Specials</StyledLink>
-      <StyledLink to="/shop/sale">Sale</StyledLink>
+      {props.types.map(type => (
+        <StyledLink to={`/shop/${type}`} key={type}>
+          {type.trim()}
+        </StyledLink>
+      ))}
     </Dropdown>
     {/* <StyledLink to="/faq">FAQ</StyledLink>
     <StyledLink to="/about">About</StyledLink>
@@ -31,6 +36,6 @@ const RenderedNav = () => (
     <StyledLink to="/blog">Blog</StyledLink>
     <StyledLink to="/contact">Contact</StyledLink> */}
   </Nav>
-);
+));
 
-export default RenderedNav;
+// export default RenderedNav;
