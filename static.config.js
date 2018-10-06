@@ -12,19 +12,16 @@ export default {
     title: 'Knots and Rows',
   }),
   getRoutes: async () => {
-    const allProducts = await client.product.fetchAll();
-    const types = new Set();
-    allProducts.forEach((product) => {
-      types.add(product.handle);
-    });
+    const collections = await client.collection.fetchAllWithProducts();
+
     const productPaths = [];
-    types.forEach((handle) => {
+    collections.forEach((collection) => {
       productPaths.push({
-        path: `/shop/${handle}`,
+        path: `/shop/${collection.handle}`,
         component: 'src/containers/Shop',
         getData: () => ({
-          allProducts,
-          pageType: handle,
+          collection, // necessary for the page render
+          collections, // necessary for the nav
         }),
       });
     });
@@ -32,16 +29,18 @@ export default {
       {
         path: '/',
         component: 'src/containers/Home',
-      },
-      {
-        path: '/shop/tonals',
-        component: 'src/containers/Shop',
         getData: () => ({
-          allProducts,
-          pageType: 'Tonals',
-          types: allProducts.map(product => product.handle),
+          collections,
         }),
       },
+      // {
+      //   path: '/shop/tonals',
+      //   component: 'src/containers/Shop',
+      //   getData: () => ({
+      //     pageType: 'Tonals',
+      //     collections,
+      //   }),
+      // },
       ...productPaths,
       // {
       //   path: '/shop/speckles',

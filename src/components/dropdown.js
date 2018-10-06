@@ -1,7 +1,6 @@
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import styled from 'react-emotion';
 import theme from '../theme';
-import StyledLink from './styled-link';
 
 const Dropdown = ({ title, container, children }) => {
   const List = styled('ol')`
@@ -56,10 +55,7 @@ const Dropdown = ({ title, container, children }) => {
     }
   };
 
-  const renderChildren = () => children.map((child, index) => {
-    console.log(child, index);
-    return <ListItem key={index}>{child}</ListItem>;
-  });
+  const renderChildren = () => children.map((child, index) => <ListItem key={index}>{child}</ListItem>);
 
   return (
     <React.Fragment>

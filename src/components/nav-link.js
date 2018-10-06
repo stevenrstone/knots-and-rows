@@ -4,7 +4,7 @@ import { Link } from 'react-static';
 import { css } from 'emotion';
 import theme from '../theme';
 
-const StyledLink = ({ to, children }) => {
+const NavLink = ({ to, children }) => {
   const linkStyle = css`
     color: ${theme.colors.link};
     font-family: ${theme.fonts.primary};
@@ -28,4 +28,4 @@ const StyledLink = ({ to, children }) => {
   );
 };
 
-export default StyledLink;
+export default NavLink;

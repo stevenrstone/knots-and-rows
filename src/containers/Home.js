@@ -1,5 +1,5 @@
 import React from 'react';
-import { withSiteData, Head } from 'react-static';
+import { withSiteData, Head, RouteData } from 'react-static';
 import styled from 'react-emotion';
 import theme from '../theme';
 import Page from '../components/page';
@@ -20,16 +20,20 @@ const FeaturedBlock = styled('div')`
 `;
 
 export default withSiteData(({ title }) => (
-  <React.Fragment>
-    <Head>
-      <title>{title} | Premium Hand-dyed Yarn</title>
-    </Head>
-    <Page>
-      <FeaturedBlock>
-        <FeaturedItem src="/gary.jpg" alt="Featured Item" />
-        <FeaturedItem src="/gary.jpg" alt="Featured Item" />
-        <FeaturedItem src="/gary.jpg" alt="Featured Item" />
-      </FeaturedBlock>
-    </Page>
-  </React.Fragment>
+  <RouteData
+    render={types => (
+      <React.Fragment>
+        <Head>
+          <title>{title} | Premium Hand-dyed Yarn</title>
+        </Head>
+        <Page>
+          <FeaturedBlock>
+            <FeaturedItem src="/gary.jpg" alt="Featured Item" />
+            <FeaturedItem src="/gary.jpg" alt="Featured Item" />
+            <FeaturedItem src="/gary.jpg" alt="Featured Item" />
+          </FeaturedBlock>
+        </Page>
+      </React.Fragment>
+    )}
+  />
 ));
