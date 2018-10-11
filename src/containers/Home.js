@@ -21,7 +21,7 @@ const FeaturedBlock = styled('div')`
 
 export default withSiteData(({ title }) => (
   <RouteData
-    render={types => (
+    render={() => (
       <React.Fragment>
         <Head>
           <title>{title} | Premium Hand-dyed Yarn</title>

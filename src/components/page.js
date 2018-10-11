@@ -1,4 +1,5 @@
 import React from 'react';
+import { withSiteData } from 'react-static';
 import styled from 'react-emotion';
 import Header from './header';
 import Footer from './footer';
@@ -16,7 +17,7 @@ const Content = styled('div')`
   width: 100%;
 `;
 
-export default ({ title, children }) => (
+export default withSiteData(({ title, children }) => (
   <Container>
     <Content>
       <Header title={title} />
@@ -24,4 +25,4 @@ export default ({ title, children }) => (
       <Footer />
     </Content>
   </Container>
-);
+));

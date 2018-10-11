@@ -12,11 +12,6 @@ const Nav = styled('nav')`
   width: 100%;
 `;
 
-const NavLink = styled(NavLink)`
-  display: block;
-  white-space: ;
-`;
-
 export default withRouteData(props => (
   <Nav>
     <NavLink to="/">Home</NavLink>

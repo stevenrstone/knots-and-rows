@@ -7,37 +7,26 @@ import styled, { css } from 'react-emotion';
 import Page from '../components/page';
 import Paragraph from '../components/paragraph';
 import ProductTile from '../components/product-tile';
-import NavLink from '../components/nav-link';
+import StyledLink from '../components/styled-link';
 
-const ProductListing = styled('div')`
+const ProductFlex = styled('div')`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-
-  &::after {
-    content: '';
-    flex: auto;
-  }
+  flex-direction: row;
 `;
 
-const ContactLink = css`
-  margin: 0;
-`;
-
-export default withRouteData(({ collections = [], collection = [] }) => (
+export default withRouteData(({ collection = [] }) => (
   <React.Fragment>
     <Head>
       <title>{`Knots and Rows | Premium Hand-dyed Yarn ${
         collection ? ` | ${collection.title}` : ''
       }`}</title>
     </Head>
-    <Page title="Knots and Rows">
+    <Page>
       <ProductListing>
-        {collections.products && collections.products.length > 0 ? (
+        {collection.products && collection.products.length > 0 ? (
           collection.products.map(product => (
             <ProductTile
-              url={product.handle}
+              url={`/shop/${collection.handle}/${product.handle}`}
               img={product.images[0].src}
               alt={product.title}
               title={product.title}
@@ -47,10 +36,10 @@ export default withRouteData(({ collections = [], collection = [] }) => (
           ))
         ) : (
           <Paragraph>
-            All of our {collection.title} items are out of stock right now!{' '}
-            <NavLink className={ContactLink} to="/contact">
+            All of our {collection.title} are out of stock right now!{' '}
+            <StyledLink className={ContactLink} to="/contact">
               You can let us know what you're looking for
-            </NavLink>
+            </StyledLink>
             , or try again later.
           </Paragraph>
         )}

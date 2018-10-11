@@ -24,6 +24,17 @@ export default {
           collections, // necessary for the nav
         }),
       });
+
+      collection.products.forEach((product) => {
+        productPaths.push({
+          path: `/shop/${collection.handle}/${product.handle}`,
+          component: 'src/containers/Product',
+          getData: () => ({
+            product,
+            collections,
+          }),
+        });
+      });
     });
     return [
       {
