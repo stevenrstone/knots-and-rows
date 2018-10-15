@@ -17,10 +17,10 @@ const Content = styled('div')`
   width: 100%;
 `;
 
-export default withSiteData(({ title, children }) => (
+export default withSiteData(({ title, client, children }) => (
   <Container>
     <Content>
-      <Header title={title} />
+      <Header title={title} client={client} />
       {children}
       <Footer />
     </Content>
