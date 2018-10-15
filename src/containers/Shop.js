@@ -12,6 +12,7 @@ import StyledLink from '../components/styled-link';
 const ProductFlex = styled('div')`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export default withRouteData(({ collection = [] }) => (
@@ -22,7 +23,7 @@ export default withRouteData(({ collection = [] }) => (
       }`}</title>
     </Head>
     <Page>
-      <ProductListing>
+      <ProductFlex>
         {collection.products && collection.products.length > 0 ? (
           collection.products.map(product => (
             <ProductTile
@@ -43,7 +44,7 @@ export default withRouteData(({ collection = [] }) => (
             , or try again later.
           </Paragraph>
         )}
-      </ProductListing>
+      </ProductFlex>
     </Page>
   </React.Fragment>
 ));

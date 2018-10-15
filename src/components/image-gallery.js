@@ -3,11 +3,18 @@ import { withRouteData, Head } from 'react-static';
 import styled, { css } from 'react-emotion';
 
 const StyledImageGallery = styled('div')`
-  display: flex;
+  display: inline-flex;
+  flex-basis: 50%;
   flex-direction: column;
-  height: 600px;
+  height: 800px;
   max-width: 600px;
-  width: 50%;
+  padding-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    height: 400px;
+    margin: 0 auto;
+    width: 90%;
+  }
 `;
 
 const HeroImage = styled('img')`
@@ -30,6 +37,8 @@ const TileContainer = styled('div')`
 const ImageTile = styled('img')`
   cursor: pointer;
   display: inline-block;
+  max-height: 100%;
+  max-width: 100%;
   object-fit: contain;
   width: 100%;
 `;
@@ -58,7 +67,9 @@ export default class ImageGallery extends Component {
   render() {
     const Tile = styled('div')`
       display: inline-block;
+      max-height: 100%;
       flex-basis: ${100 / this.props.images.length - this.props.images.length}%;
+      overflow: hidden;
     `;
 
     const updateSelectedImage = (index) => {
@@ -83,6 +94,7 @@ export default class ImageGallery extends Component {
               className={
                 index === this.state.selectedImage ? activeImageTile : ''
               }
+              key={image.src}
             >
               <ImageTile src={image.src} alt={image.title} />
             </Tile>
