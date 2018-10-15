@@ -2,14 +2,17 @@ import Client from 'shopify-buy';
 // fetch is necessary for shopify
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
 
-const client = Client.buildClient({
+const shopifyClientInfo = {
   domain: 'knots-and-rows.myshopify.com',
   storefrontAccessToken: 'c5e395cbd4faee4e096030b725ebd1ef',
-});
+};
+
+const client = Client.buildClient(shopifyClientInfo);
 
 export default {
   getSiteData: () => ({
     title: 'Knots and Rows',
+    shopifyClientInfo,
   }),
   getRoutes: async () => {
     const collections = await client.collection.fetchAllWithProducts();
