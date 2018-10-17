@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { css } from 'react-emotion';
 import theme from '../theme';
 
@@ -48,6 +48,11 @@ const AddToCart = styled('button')`
   font-weight: bold;
   padding: 1rem 0;
   width: 100%;
+
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 `;
 
 const renderOptions = variants => variants.map(
@@ -60,30 +65,48 @@ const handleQuantityChange = (e) => {
   if (e.target.value < 1) e.target.value = 1;
 };
 
-export default ({ product }) => (
-  <React.Fragment>
-    <Form>
-      <InputField>
-        <InputLabel htmlFor="weight">Weight</InputLabel>
-        <select className={inputClass} name="weight">
-          {renderOptions(product.variants)}
-        </select>
-      </InputField>
+export default class ProductForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cartReady: false,
+    };
+  }
 
-      <InputField>
-        <InputLabel htmlFor="quantity">Quantity</InputLabel>
-        <input
-          className={inputClass}
-          type="number"
-          minimum="1"
-          step="1"
-          name="quantity"
-          defaultValue="1"
-          onChange={e => handleQuantityChange(e)}
-        />
-      </InputField>
-    </Form>
+  componentDidMount() {
+    this.props.cart.then(() => this.setState({ cartReady: true }));
+  }
 
-    <AddToCart type="button">Add to Cart</AddToCart>
-  </React.Fragment>
-);
+  render() {
+    const { product } = this.props;
+    console.log(this.state.cartReady);
+    return (
+      <React.Fragment>
+        <Form>
+          <InputField>
+            <InputLabel htmlFor="weight">Weight</InputLabel>
+            <select className={inputClass} name="weight">
+              {renderOptions(product.variants)}
+            </select>
+          </InputField>
+
+          <InputField>
+            <InputLabel htmlFor="quantity">Quantity</InputLabel>
+            <input
+              className={inputClass}
+              type="number"
+              minimum="1"
+              step="1"
+              name="quantity"
+              defaultValue="1"
+              onChange={e => handleQuantityChange(e)}
+            />
+          </InputField>
+        </Form>
+        <AddToCart type="button" disabled={!this.state.cartReady}>
+          Add to Cart
+        </AddToCart>
+      </React.Fragment>
+    );
+  }
+}

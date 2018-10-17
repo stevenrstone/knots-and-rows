@@ -47,7 +47,7 @@ class Cart extends Component {
 
   render() {
     if (this.state.cart) {
-      console.log(this.state.cart, this.state.cart.lineItems());
+      console.log(this.state.cart);
       return 'we have a cart';
     }
     return 'no cart';

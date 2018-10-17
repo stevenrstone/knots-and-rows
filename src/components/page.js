@@ -1,5 +1,5 @@
 import React from 'react';
-import { withSiteData } from 'react-static';
+import { SiteData } from 'react-static';
 import styled from 'react-emotion';
 import Header from './header';
 import Footer from './footer';
@@ -17,12 +17,16 @@ const Content = styled('div')`
   width: 100%;
 `;
 
-export default withSiteData(({ title, shopifyClientInfo, children }) => (
-  <Container>
-    <Content>
-      <Header title={title} shopifyClientInfo={shopifyClientInfo} />
-      {children}
-      <Footer />
-    </Content>
-  </Container>
-));
+export default ({ cart, children }) => (
+  <SiteData
+    render={({ title }) => (
+      <Container>
+        <Content>
+          <Header title={title} cart={cart} />
+          {children}
+          <Footer />
+        </Content>
+      </Container>
+    )}
+  />
+);
