@@ -4,8 +4,8 @@ import Client from 'shopify-buy';
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
 
 class Cart extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       cartId: null,
       cart: null,
@@ -13,42 +13,29 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    const client = Client.buildClient(this.props.shopifyClientInfo);
-    if (typeof document !== 'undefined') {
-      const allCookies = document.cookie;
-      if (
-        allCookies.split(';').filter(item => item.indexOf('KandRCartId=') >= 0)
-          .length
-      ) {
-        const cartId = allCookies.replace(
-          /(?:(?:^|.*;\s*)KandRCartId\s*\=\s*([^;]*).*$)|^.*$/,
-          '$1',
-        );
-        this.setState({
-          cartId,
-        });
-        client.checkout.fetch(cartId).then((checkout) => {
-          console.log('old checkout');
-          this.setState({
-            cart: checkout,
-          });
-        });
-      } else {
-        client.checkout.create().then((checkout) => {
-          console.log('new checkout');
-          document.cookie = `KandRCartId=${checkout.id};max-age=60*60*24*365`;
-          this.setState({
-            cart: checkout,
-          });
-        });
-      }
+    if (this.props.store) {
+      const storeState = this.props.store.getState();
+      this.setState({
+        cartId: storeState.cartId,
+        cart: storeState.lineItems,
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    console.log(this.props.store.getState());
+    const { lineItems } = this.props.store.getState();
+    if (this.state.cart !== lineItems) {
+      this.setState({
+        cart: lineItems,
+      });
     }
   }
 
   render() {
+    console.log(this.state.cart);
     if (this.state.cart) {
-      console.log(this.state.cart);
-      return 'we have a cart';
+      return JSON.stringify(this.state.cart);
     }
     return 'no cart';
   }

@@ -5,7 +5,6 @@ import theme from '../theme';
 import Page from '../components/page';
 import ProductForm from '../components/product-form';
 import ImageGallery from '../components/image-gallery';
-import Cart from '../util/cart';
 
 const FlexParent = styled('div')`
   display: flex;
@@ -45,32 +44,28 @@ const renderPrices = (variants) => {
   return `$${allPrices[0]} - $${allPrices[allPrices.length - 1]}`;
 };
 
-export default withSiteData(({ shopifyClientInfo }) => {
-  const cart = Cart.initCart(shopifyClientInfo);
-  return (
-    <RouteData
-      render={({ product }) => (
-        <React.Fragment>
-          <Head>
-            <title>{`Knots and Rows | ${product ? product.title : ''}`}</title>
-          </Head>
-          <Page cart={cart}>
-            <FlexParent>
-              {console.log(product)}
-              <ImageGallery images={product.images} />
-              <ProductInfo>
-                <ProductTitle>{product.title}</ProductTitle>
-                <StyledPrice>{renderPrices(product.variants)}</StyledPrice>
-                <ProductForm product={product} cart={cart} />
-                <div
-                  className={productDescription}
-                  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-                />
-              </ProductInfo>
-            </FlexParent>
-          </Page>
-        </React.Fragment>
-      )}
-    />
-  );
-});
+export default () => (
+  <RouteData
+    render={({ product }) => (
+      <React.Fragment>
+        <Head>
+          <title>{`Knots and Rows | ${product ? product.title : ''}`}</title>
+        </Head>
+        <Page>
+          <FlexParent>
+            <ImageGallery images={product.images} />
+            <ProductInfo>
+              <ProductTitle>{product.title}</ProductTitle>
+              <StyledPrice>{renderPrices(product.variants)}</StyledPrice>
+              <ProductForm product={product} />
+              <div
+                className={productDescription}
+                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+              />
+            </ProductInfo>
+          </FlexParent>
+        </Page>
+      </React.Fragment>
+    )}
+  />
+);

@@ -3,7 +3,8 @@ import styled from 'react-emotion';
 import theme from '../theme';
 import Afterbar from './after-bar';
 import Nav from './nav';
-// import Cart from './cart';
+import Cart from '../containers/cart';
+import store from '../util/store';
 
 const Header = styled('div')`
   align-items: center;
@@ -20,7 +21,7 @@ const Title = styled('h1')`
   margin: 0;
 `;
 
-export default ({ title, cart }) => (
+export default ({ title }) => (
   <React.Fragment>
     <Header>
       <a href="/">
@@ -29,7 +30,7 @@ export default ({ title, cart }) => (
       <Title>{title}</Title>
       <Nav />
       {/* {console.log(cart.then(data => console.log(data)))} */}
-      {/* <Cart shopifyClientInfo={shopifyClientInfo} /> */}
+      <Cart store={store} />
     </Header>
     <Afterbar />
   </React.Fragment>
