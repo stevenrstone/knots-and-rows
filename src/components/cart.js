@@ -12,7 +12,7 @@ class Cart extends Component {
     };
   }
 
-  componentDidMount() {
+  setCart() {
     if (this.props.store) {
       const storeState = this.props.store.getState();
       this.setState({
@@ -22,8 +22,15 @@ class Cart extends Component {
     }
   }
 
+  componentDidMount() {
+    this.setCart();
+  }
+
   componentDidUpdate() {
-    console.log(this.props.store.getState());
+    // if (!this.state.cart && this.props.store.getState().cartId) {
+    //   console.log(this.props.store.getState());
+    //   this.setCart();
+    // }
     const { lineItems } = this.props.store.getState();
     if (this.state.cart !== lineItems) {
       this.setState({
@@ -33,10 +40,20 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.state.cart);
-    if (this.state.cart) {
-      return JSON.stringify(this.state.cart);
+    if (this.state.cart && this.state.cart.length) {
+      return (
+        <ol>
+          {this.state.cart.map(
+            // item => console.log(item.variant),
+            item => `${item.title}, ${item.variant.title}, ${item.quantity}`,
+          )}
+        </ol>
+      );
     }
+    if (this.state.cart && !this.state.cart.length) {
+      return 'no items';
+    }
+    console.log(this.state.cart);
     return 'no cart';
   }
 }

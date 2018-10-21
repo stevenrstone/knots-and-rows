@@ -15,6 +15,11 @@ const ProductFlex = styled('div')`
   flex-wrap: wrap;
 `;
 
+const ContactLink = css`
+  display: inline;
+  margin: 0;
+`;
+
 export default withRouteData(({ collection = [] }) => (
   <React.Fragment>
     <Head>

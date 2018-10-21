@@ -32,11 +32,13 @@ const initCart = async (shopifyClientInfo) => {
       storeCartId(cartId, client);
       store.dispatch({
         type: 'UPDATE_LINE_ITEMS',
-        lineItems: await client.checkout.fetch(cartId),
+        lineItems: (await client.checkout.fetch(cartId)).lineItems,
       });
     } else {
       const cart = await client.checkout.create();
-      document.cookie = `KandRCartId=${cart.id};max-age=60*60*24*365`;
+      document.cookie = `KandRCartId=${
+        cart.id
+      };expires=2040-12-31T00:00:00.000Z;path=/`;
       // store cartid in redux store
       storeCartId(cart.id, client);
     }

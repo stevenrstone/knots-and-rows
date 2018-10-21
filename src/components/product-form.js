@@ -76,10 +76,9 @@ export default class ProductForm extends Component {
     // this.props.cart.then(() => this.setState({ cartReady: true }));
     const { cartId } = store.getState();
     const storeState = store.getState();
-    if (storeState === {}) return;
-    store
-      .getState()
-      .client.checkout.fetch(cartId)
+    if (storeState === {} || storeState.client === undefined) return;
+    storeState.client.checkout
+      .fetch(cartId)
       .then(() => this.setState({ cartId }));
   }
 
@@ -93,7 +92,6 @@ export default class ProductForm extends Component {
   }
 
   handleAddToCart = () => {
-    console.log('adding to cart');
     if (!this.state.cartId) return;
 
     const lineItemsToAdd = {
@@ -105,7 +103,6 @@ export default class ProductForm extends Component {
       .getState()
       .client.checkout.addLineItems(this.state.cartId, lineItemsToAdd)
       .then((newCheckout) => {
-        newCheckout.lineItems.forEach(item => console.log(item.quantity, item.title));
         store.dispatch({
           type: 'UPDATE_LINE_ITEMS',
           lineItems: newCheckout.lineItems,
