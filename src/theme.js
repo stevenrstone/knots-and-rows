@@ -11,6 +11,9 @@ const theme = {
     title: 'Comic Sans MS',
     primary: 'Century Gothic',
   },
+  styling: {
+    boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.2);',
+  },
 };
 
 export default theme;

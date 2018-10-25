@@ -12,6 +12,9 @@ const cartReducer = (state = {}, action) => {
     case 'UPDATE_LINE_ITEMS':
       newState = { ...newState, lineItems: action.lineItems };
       break;
+    case 'SET_CHECKOUT_URL':
+      newState = { ...newState, url: action.url };
+      break;
     default:
       break;
   }

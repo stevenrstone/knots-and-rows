@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import theme from '../theme';
 import Afterbar from './after-bar';
 import Nav from './nav';
-import Cart from '../containers/cart';
+import Cart from '../containers/cart-container';
 import store from '../util/store';
 
 const Header = styled('div')`
