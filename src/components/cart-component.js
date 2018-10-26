@@ -20,6 +20,11 @@ const CartButton = styled('button')`
   &[disabled] {
     cursor: not-allowed;
     opacity: 0.6;
+
+    &:hover {
+      cursor: not-allowed;
+      text-decoration: none;
+    }
   }
 `;
 
@@ -48,7 +53,7 @@ const CartItemList = styled('ol')`
 const CheckoutButton = styled('a')`
   background-color: ${theme.colors.bars};
   border: none;
-  color: ${theme.colors.primary};
+  color: buttontext;
   cursor: pointer;
   display: block;
   font-family: ${theme.fonts.primary};
@@ -56,6 +61,7 @@ const CheckoutButton = styled('a')`
   font-weight: bold;
   padding: 1rem 0;
   text-align: center;
+  text-decoration: none;
   width: 100%;
 `;
 
@@ -150,7 +156,7 @@ class Cart extends Component {
               </CartItemList>
               {/* {console.log(this.props.store.getState().client)} */}
               <CheckoutButton href={this.props.store.getState().url}>
-                Checkout
+                Proceed to Checkout
               </CheckoutButton>
             </StyledCart>
           ) : null}

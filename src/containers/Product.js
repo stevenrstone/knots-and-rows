@@ -3,8 +3,11 @@ import { withSiteData, RouteData, Head } from 'react-static';
 import styled, { css } from 'react-emotion';
 import theme from '../theme';
 import Page from '../components/page';
-import ProductForm from '../components/product-form';
+import ProductForm from './product-form-container';
+// import ProductForm from '../components/product-form-component';
 import ImageGallery from '../components/image-gallery';
+
+import store from '../util/store';
 
 const FlexParent = styled('div')`
   display: flex;
@@ -57,7 +60,7 @@ export default () => (
             <ProductInfo>
               <ProductTitle>{product.title}</ProductTitle>
               <StyledPrice>{renderPrices(product.variants)}</StyledPrice>
-              <ProductForm product={product} />
+              <ProductForm product={product} store={store} />
               <div
                 className={productDescription}
                 dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}

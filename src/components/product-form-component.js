@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled, { css } from 'react-emotion';
 import theme from '../theme';
-import store from '../util/store';
 
 const Form = styled('form')`
   display: flex;
@@ -72,14 +71,12 @@ export default class ProductForm extends Component {
     };
   }
 
-  componentDidMount() {
-    // this.props.cart.then(() => this.setState({ cartReady: true }));
-    const { cartId } = store.getState();
-    const storeState = store.getState();
-    if (storeState === {} || storeState.client === undefined) return;
-    storeState.client.checkout
-      .fetch(cartId)
-      .then(() => this.setState({ cartId }));
+  componentDidUpdate() {
+    if (!this.state.cartId && this.props.store.getState().cartId) {
+      this.setState({
+        cartId: this.props.store.getState().cartId,
+      });
+    }
   }
 
   handleWeightChange(e) {
@@ -99,11 +96,11 @@ export default class ProductForm extends Component {
       quantity: this.state.quantity,
     };
 
-    store
+    this.props.store
       .getState()
       .client.checkout.addLineItems(this.state.cartId, lineItemsToAdd)
       .then((newCheckout) => {
-        store.dispatch({
+        this.props.store.dispatch({
           type: 'UPDATE_LINE_ITEMS',
           lineItems: newCheckout.lineItems,
         });
