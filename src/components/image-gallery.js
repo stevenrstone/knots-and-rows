@@ -78,6 +78,8 @@ export default class ImageGallery extends Component {
       });
     };
 
+    const { images } = this.props;
+
     return (
       <StyledImageGallery>
         <HeroImage
@@ -88,17 +90,19 @@ export default class ImageGallery extends Component {
           }
         />
         <TileContainer>
-          {this.props.images.map((image, index) => (
-            <Tile
-              onClick={() => updateSelectedImage(index)}
-              className={
-                index === this.state.selectedImage ? activeImageTile : ''
-              }
-              key={image.src}
-            >
-              <ImageTile src={image.src} alt={image.title} />
-            </Tile>
-          ))}
+          {images.length > 1
+            ? images.map((image, index) => (
+                <Tile
+                  onClick={() => updateSelectedImage(index)}
+                  className={
+                    index === this.state.selectedImage ? activeImageTile : ''
+                  }
+                  key={image.src}
+                >
+                  <ImageTile src={image.src} alt={image.title} />
+                </Tile>
+            ))
+            : null}
         </TileContainer>
       </StyledImageGallery>
     );

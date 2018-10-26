@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 // import Client from 'shopify-buy';
 // fetch is necessary for shopify
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import CartListItem from './cart-list-item';
 import theme from '../theme';
 import linkStyle from './link-styling';
+
+const fixedBody = css`
+  @media (max-width: 768px) {
+    overflow: hidden;
+  }
+`;
 
 const CartContainer = styled('div')`
   right: 2rem;
@@ -42,6 +48,15 @@ const StyledCart = styled('div')`
   top: calc(100% + 0.5rem);
   width: 500px;
   z-index: 20;
+
+  @media (max-width: 768px) {
+    height: auto;
+    left: 0;
+    max-height: 100%;
+    position: fixed;
+    top: 3rem;
+    width: 100%;
+  }
 `;
 
 const CartItemList = styled('ol')`
@@ -111,13 +126,18 @@ class Cart extends Component {
   }
 
   render() {
-    const handleCartToggle = (e) => {
+    const handleCartToggle = () => {
       this.setState(
         {
           open: !this.state.open,
         },
         () => {
           if (this.state.open && typeof document !== 'undefined') {
+            /* eslint-disable */
+            document.body.classList.contains(fixedBody)
+              ? document.body.classList.remove(fixedBody)
+              : document.body.classList.add(fixedBody);
+            /* eslint-enable */
             const classThis = this;
             document.body.addEventListener('click', function outsideClick(evt) {
               const etgt = evt.target;
@@ -125,6 +145,7 @@ class Cart extends Component {
                 classThis.setState({
                   open: false,
                 });
+                document.body.classList.remove(fixedBody);
                 document.body.removeEventListener('click', outsideClick);
               }
             });
@@ -140,7 +161,7 @@ class Cart extends Component {
           <CartButton
             className={linkStyle}
             type="button"
-            onClick={e => handleCartToggle(e)}
+            onClick={handleCartToggle}
           >
             Cart ({this.state.cart.length} items)
           </CartButton>

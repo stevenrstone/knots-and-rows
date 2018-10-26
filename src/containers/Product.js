@@ -1,10 +1,9 @@
 import React from 'react';
-import { withSiteData, RouteData, Head } from 'react-static';
+import { RouteData, Head } from 'react-static';
 import styled, { css } from 'react-emotion';
 import theme from '../theme';
 import Page from '../components/page';
 import ProductForm from './product-form-container';
-// import ProductForm from '../components/product-form-component';
 import ImageGallery from '../components/image-gallery';
 
 import store from '../util/store';
@@ -12,6 +11,10 @@ import store from '../util/store';
 const FlexParent = styled('div')`
   display: flex;
   width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const ProductInfo = styled('div')`

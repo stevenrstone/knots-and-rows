@@ -9,9 +9,11 @@ const Dropdown = ({ title, container, children }) => {
     cursor: default;
     display: none;
     list-style: none;
+    margin: 1rem 0;
     padding: 1rem 0.5rem;
     position: absolute;
     text-align: left;
+    top: 0;
     z-index: 10;
   `;
 
@@ -55,11 +57,26 @@ const Dropdown = ({ title, container, children }) => {
     }
   };
 
+  const handleMouseEnter = (e) => {
+    e.target.classList.add('jsa-open');
+  };
+
+  const handleMouseLeave = (e) => {
+    if (document.querySelector('.jsa-open') !== null) {
+      document.querySelector('.jsa-open').classList.remove('jsa-open');
+    }
+    e.target.classList.remove('jsa-open');
+  };
+
   const renderChildren = () => children.map((child, index) => <ListItem key={index}>{child}</ListItem>);
 
   return (
     <React.Fragment>
-      <Title onClick={handleClick}>
+      <Title
+        onClick={handleClick}
+        onMouseEnter={e => handleMouseEnter(e)}
+        onMouseLeave={e => handleMouseLeave(e)}
+      >
         {title}
         <List>{renderChildren()}</List>
       </Title>
