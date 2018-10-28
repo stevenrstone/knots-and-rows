@@ -19,6 +19,10 @@ const NavLink = ({ to, children }) => {
     &:visited {
       color: ${theme.colors.linkVisited};
     }
+
+    @media (max-width: 768px) {
+      padding: 0.5rem 0;
+    }
   `;
 
   return (

@@ -13,6 +13,10 @@ const Header = styled('div')`
   justify-content: flex-start;
   position: relative;
   width: 100%;
+
+  @media (max-width: 768px) {
+    padding-top: 3rem;
+  }
 `;
 
 const Title = styled('h1')`

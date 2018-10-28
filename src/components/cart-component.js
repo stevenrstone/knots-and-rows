@@ -10,6 +10,17 @@ import linkStyle from './link-styling';
 const fixedBody = css`
   @media (max-width: 768px) {
     overflow: hidden;
+    position: relative;
+
+    &::after {
+      background: rgba(0, 0, 0, 0.5);
+      bottom: 0;
+      content: '';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
 `;
 

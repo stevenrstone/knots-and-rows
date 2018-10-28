@@ -1,6 +1,7 @@
 import Client from 'shopify-buy';
 // fetch is necessary for shopify
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
+import { sortCollections } from './src/util/collections';
 
 const shopifyClientInfo = {
   domain: 'knots-and-rows.myshopify.com',
@@ -15,7 +16,10 @@ export default {
     shopifyClientInfo,
   }),
   getRoutes: async () => {
-    const collections = await client.collection.fetchAllWithProducts();
+    const collections = sortCollections(
+      await client.collection.fetchAllWithProducts(),
+    );
+    console.log(collections);
 
     const productPaths = [];
     collections.forEach((collection) => {
@@ -47,35 +51,7 @@ export default {
           collections,
         }),
       },
-      // {
-      //   path: '/shop/tonals',
-      //   component: 'src/containers/Shop',
-      //   getData: () => ({
-      //     pageType: 'Tonals',
-      //     collections,
-      //   }),
-      // },
       ...productPaths,
-      // {
-      //   path: '/shop/speckles',
-      //   component: 'src/containers/Shop',
-      // },
-      // {
-      //   path: '/shop/kits',
-      //   component: 'src/containers/Shop',
-      // },
-      // {
-      //   path: '/shop/lumos',
-      //   component: 'src/containers/Shop',
-      // },
-      // {
-      //   path: '/shop/specials',
-      //   component: 'src/containers/Shop',
-      // },
-      // {
-      //   path: '/shop/sale',
-      //   component: 'src/containers/Shop',
-      // },
       {
         is404: true,
         component: 'src/containers/404',

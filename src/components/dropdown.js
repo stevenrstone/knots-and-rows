@@ -3,6 +3,20 @@ import styled from 'react-emotion';
 import theme from '../theme';
 
 const Dropdown = ({ title, container, children }) => {
+  const Title = styled('div')`
+    color: ${theme.colors.link};
+    cursor: pointer;
+    font-family: ${theme.fonts.primary};
+    margin: 0 1rem;
+    padding: 0.5rem 0;
+    position: relative;
+    text-decoration: none;
+
+    &.jsa-${title}-dropdown-open ol {
+      display: block;
+    }
+  `;
+
   const List = styled('ol')`
     background: ${theme.colors.background};
     border: 1px solid ${theme.colors.bars};
@@ -15,18 +29,12 @@ const Dropdown = ({ title, container, children }) => {
     text-align: left;
     top: 0;
     z-index: 10;
-  `;
 
-  const Title = styled('span')`
-    color: ${theme.colors.link};
-    cursor: pointer;
-    font-family: ${theme.fonts.primary};
-    margin: 0 1rem;
-    position: relative;
-    text-decoration: none;
-
-    &.jsa-open ol {
-      display: block;
+    @media (max-width: 768px) {
+      border: none;
+      margin: 0;
+      padding: 0.5rem 0;
+      position: static;
     }
   `;
 
@@ -39,18 +47,19 @@ const Dropdown = ({ title, container, children }) => {
     }
   `;
 
-  const handleClick = (e) => {
+  // this won't
+  const handleTouch = (e) => {
     const clickTarget = e.target;
-    if (clickTarget.classList.contains('jsa-open')) {
-      clickTarget.classList.remove('jsa-open');
+    if (clickTarget.classList.contains(`jsa-${title}-dropdown-open`)) {
+      clickTarget.classList.remove(`jsa-${title}-dropdown-open`);
     } else {
-      clickTarget.classList.add('jsa-open');
+      clickTarget.classList.add(`jsa-${title}-dropdown-open`);
       container.addEventListener('click', function outsideClick(ebody) {
         if (
           ebody.target.contains(clickTarget)
           && ebody.target !== clickTarget
         ) {
-          clickTarget.classList.remove('jsa-open');
+          clickTarget.classList.remove(`jsa-${title}-dropdown-open`);
           container.removeEventListener('click', outsideClick);
         }
       });
@@ -58,14 +67,16 @@ const Dropdown = ({ title, container, children }) => {
   };
 
   const handleMouseEnter = (e) => {
-    e.target.classList.add('jsa-open');
+    e.target.classList.add(`jsa-${title}-dropdown-open`);
   };
 
   const handleMouseLeave = (e) => {
-    if (document.querySelector('.jsa-open') !== null) {
-      document.querySelector('.jsa-open').classList.remove('jsa-open');
+    if (document.querySelector(`.jsa-${title}-dropdown-open`) !== null) {
+      document
+        .querySelector(`.jsa-${title}-dropdown-open`)
+        .classList.remove(`jsa-${title}-dropdown-open`);
     }
-    e.target.classList.remove('jsa-open');
+    e.target.classList.remove(`jsa-${title}-dropdown-open`);
   };
 
   const renderChildren = () => children.map((child, index) => <ListItem key={index}>{child}</ListItem>);
@@ -73,7 +84,7 @@ const Dropdown = ({ title, container, children }) => {
   return (
     <React.Fragment>
       <Title
-        onClick={handleClick}
+        onTouchEnd={handleTouch}
         onMouseEnter={e => handleMouseEnter(e)}
         onMouseLeave={e => handleMouseLeave(e)}
       >
