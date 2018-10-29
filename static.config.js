@@ -1,7 +1,9 @@
 import Client from 'shopify-buy';
 // fetch is necessary for shopify
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
-import { sortCollections } from './src/util/collections';
+import marked from 'marked';
+import fs from 'fs';
+import { sortCollections } from './content/collections';
 
 const shopifyClientInfo = {
   domain: 'knots-and-rows.myshopify.com',
@@ -9,6 +11,9 @@ const shopifyClientInfo = {
 };
 
 const client = Client.buildClient(shopifyClientInfo);
+
+// fetch(faqsContent).then(response => response.text).then(text => )
+const faqsContent = fs.readFileSync('./content/faqs.md', 'utf8');
 
 export default {
   getSiteData: () => ({
@@ -19,7 +24,7 @@ export default {
     const collections = sortCollections(
       await client.collection.fetchAllWithProducts(),
     );
-    console.log(collections);
+    const faqsHtml = marked(faqsContent);
 
     const productPaths = [];
     collections.forEach((collection) => {
@@ -49,6 +54,14 @@ export default {
         component: 'src/containers/Home',
         getData: () => ({
           collections,
+        }),
+      },
+      {
+        path: '/faqs',
+        component: 'src/containers/FAQs',
+        getData: () => ({
+          collections,
+          faqsHtml,
         }),
       },
       ...productPaths,

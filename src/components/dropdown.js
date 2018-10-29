@@ -8,12 +8,15 @@ const Dropdown = ({ title, container, children }) => {
     cursor: pointer;
     font-family: ${theme.fonts.primary};
     margin: 0 1rem;
-    padding: 0.5rem 0;
     position: relative;
     text-decoration: none;
 
     &.jsa-${title}-dropdown-open ol {
       display: block;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0.5rem 0;
     }
   `;
 
