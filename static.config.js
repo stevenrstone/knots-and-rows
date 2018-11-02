@@ -14,6 +14,7 @@ const client = Client.buildClient(shopifyClientInfo);
 
 // fetch(faqsContent).then(response => response.text).then(text => )
 const faqsContent = fs.readFileSync('./content/faqs.md', 'utf8');
+const aboutContent = fs.readFileSync('./content/about.md', 'utf8');
 
 export default {
   getSiteData: () => ({
@@ -25,6 +26,7 @@ export default {
       await client.collection.fetchAllWithProducts(),
     );
     const faqsHtml = marked(faqsContent);
+    const aboutHtml = marked(aboutContent);
 
     const productPaths = [];
     collections.forEach((collection) => {
@@ -62,6 +64,14 @@ export default {
         getData: () => ({
           collections,
           faqsHtml,
+        }),
+      },
+      {
+        path: '/about',
+        component: 'src/containers/About',
+        getData: () => ({
+          collections,
+          aboutHtml,
         }),
       },
       ...productPaths,

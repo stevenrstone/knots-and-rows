@@ -62,9 +62,9 @@ export default withRouteData((props) => {
             </NavLink>
           ))}
         </Dropdown>
-        {/* <StyledLink to="/faq">FAQ</StyledLink>
-    <StyledLink to="/about">About</StyledLink>
-    <StyledLink to="/patterns">Patterns</StyledLink>
+        <NavLink to="/frequently-asked-questions">FAQ</NavLink>
+        <NavLink to="/about">About</NavLink>
+        {/* <StyledLink to="/patterns">Patterns</StyledLink>
     <StyledLink to="/blog">Blog</StyledLink>
     <StyledLink to="/contact">Contact</StyledLink> */}
       </Nav>
