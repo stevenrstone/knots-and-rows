@@ -136,6 +136,41 @@ class Cart extends Component {
     }
   }
 
+  handleQuantityChange = (quantity, item) => {
+    const checkoutId = this.state.cartId;
+    const { client } = this.props.store.getState();
+    const lineItemsToUpdate = [
+      {
+        id: item.id,
+        quantity: parseInt(quantity, 10),
+      },
+    ];
+
+    client.checkout
+      .updateLineItems(checkoutId, lineItemsToUpdate)
+      .then((newCheckout) => {
+        this.props.store.dispatch({
+          type: 'UPDATE_LINE_ITEMS',
+          lineItems: newCheckout.lineItems,
+        });
+      });
+  };
+
+  handleRemoveItem = (item) => {
+    const checkoutId = this.state.cartId;
+    const { client } = this.props.store.getState();
+    const lineItemsToRemove = [item.id];
+
+    client.checkout
+      .removeLineItems(checkoutId, lineItemsToRemove)
+      .then((newCheckout) => {
+        this.props.store.dispatch({
+          type: 'UPDATE_LINE_ITEMS',
+          lineItems: newCheckout.lineItems,
+        });
+      });
+  };
+
   render() {
     const handleCartToggle = () => {
       this.setState(
@@ -182,7 +217,14 @@ class Cart extends Component {
                 {this.state.cart.map(
                   // item => console.log(item.variant),
                   item => (
-                    <CartListItem key={item.title} item={item} />
+                    <CartListItem
+                      key={item.title}
+                      item={item}
+                      handleQuantityChange={this.handleQuantityChange}
+                      handleRemoveItem={this.handleRemoveItem}
+                      // cartId={this.state.cartId}
+                      // client={this.props.store.getState().client}
+                    />
                   ),
                 )}
               </CartItemList>

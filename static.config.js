@@ -59,7 +59,7 @@ export default {
         }),
       },
       {
-        path: '/faqs',
+        path: '/frequently-asked-questions',
         component: 'src/containers/FAQs',
         getData: () => ({
           collections,
