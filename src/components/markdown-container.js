@@ -3,9 +3,14 @@ import styled from 'react-emotion';
 import theme from '../theme';
 
 const MarkdownContainer = styled('div')`
-color: ${theme.colors.copy};
-font-family: ${theme.fonts.primary};
+  color: ${theme.colors.copy};
+  font-family: ${theme.fonts.primary};
   padding: 1rem;
+
+  img {
+    display: inline-block;
+    margin: 0 0.5rem 0.5rem 0;
+  }
 `;
 
 export default MarkdownContainer;

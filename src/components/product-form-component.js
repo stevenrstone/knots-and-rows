@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled, { css } from 'react-emotion';
+import LoadingSheep from './loading-sheep';
 import theme from '../theme';
 
 const Form = styled('form')`
@@ -143,6 +144,7 @@ export default class ProductForm extends Component {
         >
           Add to Cart
         </AddToCart>
+        {/* <LoadingSheep /> */}
       </React.Fragment>
     );
   }

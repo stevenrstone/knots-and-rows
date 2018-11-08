@@ -28,6 +28,18 @@ const CartContainer = styled('div')`
   right: 2rem;
   position: absolute;
   top: 2rem;
+
+  @media (max-width: 768px) {
+    background: ${theme.colors.background};
+    box-shadow: ${theme.styling.boxShadow};
+    left: 0;
+    padding: 1rem;
+    position: fixed;
+    right: 0;
+    text-align: right;
+    top: 0;
+    z-index: 50;
+  }
 `;
 
 const CartButton = styled('button')`
@@ -133,6 +145,11 @@ class Cart extends Component {
       this.setState({
         cart: lineItems,
       });
+      if (this.state.open && lineItems.length === 0) {
+        if (typeof document !== 'undefined') {
+          document.body.classList.remove(fixedBody);
+        }
+      }
     }
   }
 
@@ -171,35 +188,37 @@ class Cart extends Component {
       });
   };
 
-  render() {
-    const handleCartToggle = () => {
-      this.setState(
-        {
-          open: !this.state.open,
-        },
-        () => {
-          if (this.state.open && typeof document !== 'undefined') {
-            /* eslint-disable */
-            document.body.classList.contains(fixedBody)
-              ? document.body.classList.remove(fixedBody)
-              : document.body.classList.add(fixedBody);
-            /* eslint-enable */
-            const classThis = this;
-            document.body.addEventListener('click', function outsideClick(evt) {
-              const etgt = evt.target;
-              if (etgt.closest('.js-cart') === null) {
-                classThis.setState({
-                  open: false,
-                });
-                document.body.classList.remove(fixedBody);
-                document.body.removeEventListener('click', outsideClick);
-              }
-            });
-          }
-        },
-      );
-    };
+  handleCartToggle = () => {
+    this.setState(
+      {
+        open: !this.state.open,
+      },
+      () => {
+        if (this.state.open && typeof document !== 'undefined') {
+          /* eslint-disable */
+          document.body.classList.contains(fixedBody)
+            ? document.body.classList.remove(fixedBody)
+            : document.body.classList.add(fixedBody);
+          /* eslint-enable */
+          const classThis = this;
+          document.body.addEventListener('click', function outsideClick(evt) {
+            const etgt = evt.target;
+            if (etgt.closest('.js-cart') === null) {
+              classThis.setState({
+                open: false,
+              });
+              document.body.classList.remove(fixedBody);
+              document.body.removeEventListener('click', outsideClick);
+            }
+          });
+        } else if (typeof document !== 'undefined') {
+          document.body.classList.remove(fixedBody);
+        }
+      },
+    );
+  };
 
+  render() {
     if (this.state.cart && this.state.cart.length) {
       // console.log(this.state.cart);
       return (
@@ -207,7 +226,7 @@ class Cart extends Component {
           <CartButton
             className={linkStyle}
             type="button"
-            onClick={handleCartToggle}
+            onClick={this.handleCartToggle}
           >
             Cart ({this.state.cart.length} items)
           </CartButton>
