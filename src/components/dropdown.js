@@ -16,7 +16,7 @@ const Dropdown = ({ title, container, children }) => {
     }
 
     @media (max-width: 768px) {
-      padding: 0.5rem 0;
+      padding: 1rem 0;
     }
   `;
 
@@ -45,12 +45,15 @@ const Dropdown = ({ title, container, children }) => {
     margin: 0.5rem 0;
     white-space: nowrap;
 
+    @media (max-width: 768px) {
+      margin: 1rem 0;
+    }
+
     a {
       padding: 0.5rem 0;
     }
   `;
 
-  // this won't
   const handleTouch = (e) => {
     const clickTarget = e.target;
     if (clickTarget.classList.contains(`jsa-${title}-dropdown-open`)) {

@@ -119,6 +119,7 @@ export default class ProductForm extends Component {
               className={inputClass}
               name="weight"
               onChange={e => this.handleWeightChange(e)}
+              disabled={product.variants.length === 1}
             >
               {renderOptions(product.variants)}
             </select>

@@ -55,6 +55,12 @@ const CartButton = styled('button')`
       text-decoration: none;
     }
   }
+
+  @media (max-width: 768px) {
+    display: block;
+    text-align: right;
+    width: 100%;
+  }
 `;
 
 const StyledCart = styled('div')`

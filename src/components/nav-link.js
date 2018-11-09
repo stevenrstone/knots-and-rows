@@ -21,7 +21,7 @@ const NavLink = ({ to, children }) => {
     }
 
     @media (max-width: 768px) {
-      padding: 0.5rem 0;
+      padding: 1rem 0;
     }
   `;
 

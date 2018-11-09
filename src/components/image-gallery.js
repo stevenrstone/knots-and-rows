@@ -43,7 +43,7 @@ const ImageTile = styled('img')`
   width: 100%;
 `;
 
-const activeImageTile = css`
+const inactiveImageTile = css`
   position: relative;
   &::after {
     background: rgba(255, 255, 255, 0.6);
@@ -95,7 +95,7 @@ export default class ImageGallery extends Component {
                 <Tile
                   onClick={() => updateSelectedImage(index)}
                   className={
-                    index === this.state.selectedImage ? activeImageTile : ''
+                    index !== this.state.selectedImage ? inactiveImageTile : ''
                   }
                   key={image.src}
                 >
