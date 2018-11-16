@@ -47,6 +47,8 @@ const AddToCart = styled('button')`
   display: block;
   font-size: 1.2rem;
   font-weight: bold;
+  height: 4rem;
+  overflow: hidden;
   padding: 1rem 0;
   width: 100%;
 
@@ -69,6 +71,7 @@ export default class ProductForm extends Component {
       cartId: null,
       weight: this.props.product.variants[0].id,
       quantity: 1,
+      pending: true,
     };
   }
 
@@ -76,6 +79,7 @@ export default class ProductForm extends Component {
     if (!this.state.cartId && this.props.store.getState().cartId) {
       this.setState({
         cartId: this.props.store.getState().cartId,
+        pending: false,
       });
     }
   }
@@ -91,6 +95,9 @@ export default class ProductForm extends Component {
 
   handleAddToCart = () => {
     if (!this.state.cartId) return;
+    this.setState({
+      pending: true,
+    });
 
     const lineItemsToAdd = {
       variantId: this.state.weight,
@@ -104,6 +111,10 @@ export default class ProductForm extends Component {
         this.props.store.dispatch({
           type: 'UPDATE_LINE_ITEMS',
           lineItems: newCheckout.lineItems,
+        });
+
+        this.setState({
+          pending: false,
         });
       });
   };
@@ -143,7 +154,7 @@ export default class ProductForm extends Component {
           disabled={!this.state.cartId}
           onClick={this.handleAddToCart}
         >
-          Add to Cart
+          {this.state.pending ? <LoadingSheep /> : 'Add to Cart'}
         </AddToCart>
         {/* <LoadingSheep /> */}
       </React.Fragment>

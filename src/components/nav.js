@@ -46,7 +46,6 @@ export default withRouteData((props) => {
   const handleMobileMenuClick = (e) => {
     e.target.classList.toggle('jsa-mobile-nav-open');
   };
-  console.log(props.collections);
   return (
     <React.Fragment>
       <MobileMenuButton onClick={handleMobileMenuClick}>Menu</MobileMenuButton>

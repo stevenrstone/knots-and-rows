@@ -35,7 +35,7 @@ const TileContainer = styled('div')`
 `;
 
 const ImageTile = styled('img')`
-  cursor: pointer;
+  cursor: default;
   display: inline-block;
   max-height: 100%;
   max-width: 100%;
@@ -44,6 +44,7 @@ const ImageTile = styled('img')`
 `;
 
 const inactiveImageTile = css`
+  cursor: pointer;
   position: relative;
   &::after {
     background: rgba(255, 255, 255, 0.6);
