@@ -6,6 +6,9 @@ const LoadingBar = styled('div')`
   align-items: center;
   display: flex;
   height: 100%;
+  justify-content: center;
+  overflow: visible;
+  margin: 0 auto;
 `;
 
 const StyledSheep = styled('div')`

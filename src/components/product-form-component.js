@@ -48,7 +48,7 @@ const AddToCart = styled('button')`
   font-size: 1.2rem;
   font-weight: bold;
   height: 4rem;
-  overflow: hidden;
+  overflow: visible;
   padding: 1rem 0;
   width: 100%;
 
@@ -156,7 +156,6 @@ export default class ProductForm extends Component {
         >
           {this.state.pending ? <LoadingSheep /> : 'Add to Cart'}
         </AddToCart>
-        {/* <LoadingSheep /> */}
       </React.Fragment>
     );
   }
