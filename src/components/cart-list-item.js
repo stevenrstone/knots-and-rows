@@ -40,6 +40,18 @@ const StyledCartListItem = styled('li')`
   }
 `;
 
+const RemoveSymbol = styled('span')`
+  align-items: center;
+  background: ${theme.colors.link};
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  height: 1rem;
+  justify-content: center;
+  width: 1rem;
+`;
+
 const CartListItem = ({ item, handleQuantityChange, handleRemoveItem }) => (
   <StyledCartListItem>
     <img className="image" src={item.variant.image.src} alt={item.title} />
@@ -66,7 +78,7 @@ const CartListItem = ({ item, handleQuantityChange, handleRemoveItem }) => (
     <span className="price">
       ${(parseFloat(item.variant.price) * item.quantity).toString()}
     </span>
-    <span onClick={() => handleRemoveItem(item)}>Remove</span>
+    <RemoveSymbol onClick={() => handleRemoveItem(item)}>&times;</RemoveSymbol>
   </StyledCartListItem>
 );
 

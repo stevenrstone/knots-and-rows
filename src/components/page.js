@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { SiteData } from 'react-static';
 import styled from 'react-emotion';
 import Header from './header';
@@ -17,16 +17,29 @@ const Content = styled('div')`
   width: 100%;
 `;
 
-export default ({ cart, children }) => (
-  <SiteData
-    render={({ title }) => (
-      <Container>
-        <Content>
-          <Header title={title} cart={cart} />
-          {children}
-          <Footer />
-        </Content>
-      </Container>
-    )}
-  />
-);
+// export default ({ cart, children }) => (
+export default class Page extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.props = props;
+  }
+
+  render() {
+    return (
+      <SiteData
+        render={({ title }) => (
+          <Container>
+            <Content>
+              <Header title={title} cart={this.props.cart} />
+              {this.props.children}
+              <Footer />
+            </Content>
+          </Container>
+        )}
+      />
+    );
+  }
+
+  // );
+}

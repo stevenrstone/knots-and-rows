@@ -225,8 +225,19 @@ class Cart extends Component {
   };
 
   render() {
+    const renderSubtotal = () => {
+      const SubtotalLine = styled('li')`
+        font-family: ${theme.fonts.primary};
+        text-align: right;
+      `;
+      const subtotal = this.state.cart.reduce(
+        (acc, item) => acc + item.quantity * parseFloat(item.variant.price, 10),
+        0,
+      );
+      return <SubtotalLine>Subtotal: ${subtotal}</SubtotalLine>;
+    };
+
     if (this.state.cart && this.state.cart.length) {
-      // console.log(this.state.cart);
       return (
         <CartContainer className="js-cart">
           <CartButton
@@ -239,21 +250,16 @@ class Cart extends Component {
           {this.state.open ? (
             <StyledCart>
               <CartItemList>
-                {this.state.cart.map(
-                  // item => console.log(item.variant),
-                  item => (
-                    <CartListItem
-                      key={item.title}
-                      item={item}
-                      handleQuantityChange={this.handleQuantityChange}
-                      handleRemoveItem={this.handleRemoveItem}
-                      // cartId={this.state.cartId}
-                      // client={this.props.store.getState().client}
-                    />
-                  ),
-                )}
+                {this.state.cart.map(item => (
+                  <CartListItem
+                    key={item.title}
+                    item={item}
+                    handleQuantityChange={this.handleQuantityChange}
+                    handleRemoveItem={this.handleRemoveItem}
+                  />
+                ))}
+                {renderSubtotal()}
               </CartItemList>
-              {/* {console.log(this.props.store.getState().client)} */}
               <CheckoutButton href={this.props.store.getState().url}>
                 Proceed to Checkout
               </CheckoutButton>
@@ -271,7 +277,6 @@ class Cart extends Component {
         </CartContainer>
       );
     }
-    // console.log(this.state.cart);
     return (
       <CartContainer>
         <CartButton className={linkStyle} type="button" disabled>

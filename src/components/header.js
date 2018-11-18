@@ -29,7 +29,7 @@ export default ({ title }) => (
   <React.Fragment>
     <Header>
       <a href="/">
-        <img src="/gary.jpg" alt="Knots and Rows Logo" />
+        <img src="/gary.svg" alt="Knots and Rows Logo" />
       </a>
       <Title>{title}</Title>
       <Nav />

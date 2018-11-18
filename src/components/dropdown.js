@@ -87,6 +87,8 @@ const Dropdown = ({ title, container, children }) => {
 
   const renderChildren = () => children.map((child, index) => <ListItem key={index}>{child}</ListItem>);
 
+  if (!children) return null;
+
   return (
     <React.Fragment>
       <Title

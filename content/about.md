@@ -1,4 +1,4 @@
-<img align="left" src="/gary.jpg" alt="About Knots & Rows" />
+<img align="left" src="/gary.svg" alt="About Knots & Rows" />
 
 # About Knots & Rows
 
@@ -14,7 +14,7 @@ But you know what? Buying yarn to enjoy, without even using, is still okay in my
 
 My philosophy is that no one should waste any investment of their time and effort into something that is not purely themselves. Our time is our most precious commodity. Therefore, each skein of yarn that I offer has been individually weighed, skeined, and painted by me with you in mind. Your projects, your dreams, your personality quirks. Each skein is unique and, like you, beautiful with love at its core.
 
-<img align="left" src="/jona-400.jpg" width="180" height="180" alt="About the Dyer" />
+<img align="left" src="/jona-400.jpg" width="240" height="240" alt="About the Dyer" />
 
 # About the Dyer
 

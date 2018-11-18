@@ -7,17 +7,12 @@ import styled, { css } from 'react-emotion';
 import Page from '../components/page';
 import Paragraph from '../components/paragraph';
 import ProductTile from '../components/product-tile';
-import StyledLink from '../components/styled-link';
+import StyledLink, { InlineLink } from '../components/styled-link';
 
 const ProductFlex = styled('div')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-`;
-
-const ContactLink = css`
-  display: inline;
-  margin: 0;
 `;
 
 export default withRouteData(({ collection = [] }) => (
@@ -43,7 +38,7 @@ export default withRouteData(({ collection = [] }) => (
         ) : (
           <Paragraph>
             All of our {collection.title} are out of stock right now!{' '}
-            <StyledLink className={ContactLink} to="/contact">
+            <StyledLink className={InlineLink} to="/contact">
               You can let us know what you're looking for
             </StyledLink>
             , or try again later.

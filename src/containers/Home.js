@@ -28,9 +28,9 @@ export default withSiteData(({ title }) => (
         </Head>
         <Page>
           <FeaturedBlock>
-            <FeaturedItem src="/gary.jpg" alt="Featured Item" />
-            <FeaturedItem src="/gary.jpg" alt="Featured Item" />
-            <FeaturedItem src="/gary.jpg" alt="Featured Item" />
+            <FeaturedItem src="/gary.svg" alt="Featured Item" />
+            <FeaturedItem src="/gary.svg" alt="Featured Item" />
+            <FeaturedItem src="/gary.svg" alt="Featured Item" />
           </FeaturedBlock>
         </Page>
       </React.Fragment>

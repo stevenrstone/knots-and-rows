@@ -74,10 +74,20 @@ export default {
           aboutHtml,
         }),
       },
+      {
+        path: '/contact',
+        component: 'src/containers/Contact',
+        getData: () => ({
+          collections,
+        }),
+      },
       ...productPaths,
       {
         is404: true,
         component: 'src/containers/404',
+        getData: () => ({
+          collections,
+        }),
       },
     ];
   },
