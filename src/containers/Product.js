@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteData, Head } from 'react-static';
-import styled, { css } from 'react-emotion';
-import theme from '../theme';
+import styled, { css } from 'astroturf';
+// import theme from '../theme';
 import Page from '../components/page';
 import ProductForm from './product-form-container';
 import ImageGallery from '../components/image-gallery';
@@ -25,22 +25,30 @@ const ProductInfo = styled('div')`
 `;
 
 const ProductTitle = styled('h1')`
-  color: ${theme.colors.primary};
-  font-family: ${theme.fonts.primary};
+  @import '../theme.scss';
+
+  color: $colorCopy;
+  font-family: $fontPrimary;
   font-size: 2rem;
   margin: 0;
 `;
 
 const StyledPrice = styled('h2')`
-  color: ${theme.colors.primary};
-  font-family: ${theme.fonts.primary};
+  @import '../theme.scss';
+
+  color: $colorCopy;
+  font-family: $fontPrimary;
   font-size: 1.3rem;
   margin: 0.5rem 0;
 `;
 
-const productDescription = css`
-  color: ${theme.colors.primary};
-  font-family: ${theme.fonts.primary};
+const styles = css`
+  .productDescription {
+    @import '../theme.scss';
+
+    color: $colorCopy;
+    font-family: $fontPrimary;
+  }
 `;
 
 const renderPrices = (variants) => {
@@ -68,7 +76,7 @@ export default () => (
               <StyledPrice>{renderPrices(product.variants)}</StyledPrice>
               <ProductForm product={product} store={store} />
               <div
-                className={productDescription}
+                className={styles.productDescription}
                 dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
               />
             </ProductInfo>

@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'react-emotion';
-import theme from '../theme';
+import styled from 'astroturf';
 
 const StyledCartListItem = styled('li')`
+  @import '../theme.scss';
   align-items: center;
-  border-bottom: 1px solid ${theme.colors.bars};
+  border-bottom: 1px solid $colorBars;
   display: flex;
-  font-family: ${theme.fonts.primary};
+  font-family: $fontPrimary;
   height: 100px;
   justify-content: space-between;
   width: 100%;
@@ -20,7 +20,7 @@ const StyledCartListItem = styled('li')`
     align-items: center;
     display: inline-flex;
     flex-grow: 3;
-    font-family: ${theme.fonts.primary};
+    font-family: $fontPrimary;
     height: 100%;
     padding: 0 0.5rem;
     text-align: left;
@@ -29,20 +29,21 @@ const StyledCartListItem = styled('li')`
   .price {
     align-items: center;
     display: inline-flex;
-    font-family: ${theme.fonts.primary};
+    font-family: $fontPrimary;
     height: 100%;
     padding: 0 0.5rem;
     text-align: left;
   }
 
   input {
-    font-family: ${theme.fonts.primary};
+    font-family: $fontPrimary;
   }
 `;
 
 const RemoveSymbol = styled('span')`
+  @import '../theme.scss';
   align-items: center;
-  background: ${theme.colors.link};
+  background: $colorLink;
   border-radius: 50%;
   color: white;
   cursor: pointer;

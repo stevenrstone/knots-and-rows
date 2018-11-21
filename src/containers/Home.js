@@ -1,12 +1,12 @@
 import React from 'react';
 import { withSiteData, Head, RouteData } from 'react-static';
-import styled from 'react-emotion';
-import theme from '../theme';
+import styled from 'astroturf';
 import Page from '../components/page';
 import FeaturedItem from '../components/featured-item';
 
 const FeaturedBlock = styled('div')`
-  background-color: ${theme.colors.backgroundImage};
+  @import '../theme.scss';
+  background-color: $colorBackgroundImage;
   display: flex;
   justify-content: space-around;
   margin: 0 auto;

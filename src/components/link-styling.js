@@ -1,20 +1,23 @@
 import React from 'react';
-import { css } from 'react-emotion';
-import theme from '../theme';
+import { css } from 'astroturf';
 
-const linkStyle = css`
-  color: ${theme.colors.link};
-  font-family: ${theme.fonts.primary};
-  text-decoration: none;
+const styles = css`
+  @import '../theme.scss';
 
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
+  .linkStyle {
+    color: $colorLink;
+    font-family: $fontPrimary;
+    text-decoration: none;
 
-  &:visited {
-    color: ${theme.colors.linkVisited};
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: $colorLinkVisited;
+    }
   }
 `;
 
-export default linkStyle;
+export default styles.linkStyle;

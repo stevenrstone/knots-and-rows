@@ -1,17 +1,17 @@
 import React from 'react';
-import styled from 'react-emotion';
-import theme from '../theme';
+import styled from 'astroturf';
 
 const Dropdown = ({ title, container, children }) => {
   const Title = styled('div')`
-    color: ${theme.colors.link};
+    @import '../theme.scss';
+    color: $colorLink;
     cursor: pointer;
-    font-family: ${theme.fonts.primary};
+    font-family: $fontPrimary;
     margin: 0 1rem;
     position: relative;
     text-decoration: none;
 
-    &.jsa-${title}-dropdown-open ol {
+    &.jsa-dropdown-open ol {
       display: block;
     }
 
@@ -21,8 +21,9 @@ const Dropdown = ({ title, container, children }) => {
   `;
 
   const List = styled('ol')`
-    background: ${theme.colors.background};
-    border: 1px solid ${theme.colors.bars};
+    @import '../theme.scss';
+    background: $colorBackground;
+    border: 1px solid $colorBars;
     cursor: default;
     display: none;
     list-style: none;
@@ -56,16 +57,16 @@ const Dropdown = ({ title, container, children }) => {
 
   const handleTouch = (e) => {
     const clickTarget = e.target;
-    if (clickTarget.classList.contains(`jsa-${title}-dropdown-open`)) {
-      clickTarget.classList.remove(`jsa-${title}-dropdown-open`);
+    if (clickTarget.classList.contains('jsa-dropdown-open')) {
+      clickTarget.classList.remove('jsa-dropdown-open');
     } else {
-      clickTarget.classList.add(`jsa-${title}-dropdown-open`);
+      clickTarget.classList.add('jsa-dropdown-open');
       container.addEventListener('click', function outsideClick(ebody) {
         if (
           ebody.target.contains(clickTarget)
           && ebody.target !== clickTarget
         ) {
-          clickTarget.classList.remove(`jsa-${title}-dropdown-open`);
+          clickTarget.classList.remove('jsa-dropdown-open');
           container.removeEventListener('click', outsideClick);
         }
       });
@@ -73,16 +74,16 @@ const Dropdown = ({ title, container, children }) => {
   };
 
   const handleMouseEnter = (e) => {
-    e.target.classList.add(`jsa-${title}-dropdown-open`);
+    e.target.classList.add('jsa-dropdown-open');
   };
 
   const handleMouseLeave = (e) => {
-    if (document.querySelector(`.jsa-${title}-dropdown-open`) !== null) {
+    if (document.querySelector('.jsa-dropdown-open') !== null) {
       document
-        .querySelector(`.jsa-${title}-dropdown-open`)
-        .classList.remove(`jsa-${title}-dropdown-open`);
+        .querySelector('.jsa-dropdown-open')
+        .classList.remove('jsa-dropdown-open');
     }
-    e.target.classList.remove(`jsa-${title}-dropdown-open`);
+    e.target.classList.remove('jsa-dropdown-open');
   };
 
   const renderChildren = () => children.map((child, index) => <ListItem key={index}>{child}</ListItem>);

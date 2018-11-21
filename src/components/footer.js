@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from 'react-emotion';
+import styled from 'astroturf';
 import Afterbar from './after-bar';
-import theme from '../theme';
 
 const LegalCopy = styled('p')`
-  color: ${theme.colors.copy};
+  @import '../theme.scss';
+  color: $colorCopy;
   margin: 1rem auto;
   max-width: 80%;
 `;

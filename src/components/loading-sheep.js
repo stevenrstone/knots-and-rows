@@ -1,6 +1,5 @@
 import React from 'react';
-import styled, { css } from 'react-emotion';
-import theme from '../theme';
+import styled, { css } from 'astroturf';
 
 const LoadingBar = styled('div')`
   align-items: center;
@@ -13,8 +12,6 @@ const LoadingBar = styled('div')`
 
 const StyledSheep = styled('div')`
   animation: spin 1.3s infinite linear;
-  // border: 1px solid black;
-  // flex-grow: 2;
   height: 75px;
   min-height: 75px;
   min-width: 50px;
@@ -95,8 +92,9 @@ const Ear = styled('div')`
 `;
 
 const LoadingText = styled('h3')`
+  @import '../theme.scss';
   box-sizing: border-box;
-  font-family: ${theme.fonts.primary};
+  font-family: $fontPrimary;
   font-size: 1rem;
   padding-left: 1rem;
 `;

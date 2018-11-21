@@ -1,9 +1,9 @@
-import styled from 'react-emotion';
-import theme from '../theme';
+import styled from 'astroturf';
 
 const Paragraph = styled('p')`
-  color: ${theme.colors.copy};
-  font-family: ${theme.fonts.primary};
+  @import '../theme.scss';
+  color: $colorCopy;
+  font-family: $fontPrimary;
   font-size: 16px;
   padding: 0 0.5rem;
 `;

@@ -1,9 +1,8 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
-import styled from 'react-emotion';
+import styled from 'astroturf';
 import Dropdown from './dropdown';
 import NavLink from './nav-link';
-import theme from '../theme';
 
 const Nav = styled('nav')`
   display: flex;
@@ -22,13 +21,14 @@ const Nav = styled('nav')`
 `;
 
 const MobileMenuButton = styled('button')`
+  @import '../theme.scss';
   background: transparent;
   border: none;
-  // border-bottom: 2px solid ${theme.colors.bars};
-  color: ${theme.colors.link};
+  // border-bottom: 2px solid $colorBars;
+  color: $colorLink;
   cursor: pointer;
   display: none;
-  font-family: ${theme.fonts.primary};
+  font-family: $fontPrimary;
   font-size: 1.3rem;
   margin-top: 1rem;
   width: 100%;

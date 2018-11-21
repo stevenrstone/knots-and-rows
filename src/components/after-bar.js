@@ -1,9 +1,10 @@
-import styled from 'react-emotion';
-import theme from '../theme';
+import styled from 'astroturf';
 
 const cls = styled('hr')`
-  background: ${theme.colors.bars};
-  box-shadow: ${theme.styling.boxShadow};
+  @import '../theme.scss';
+
+  background: $colorBackground;
+  box-shadow: $stylingBoxShadow;
   content: '';
   height: 2px;
   margin: 2rem auto;

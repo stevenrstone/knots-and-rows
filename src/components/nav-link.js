@@ -1,32 +1,34 @@
 import React from 'react';
 import { Link } from 'react-static';
-// import styled from 'react-emotion';
-import { css } from 'emotion';
-import theme from '../theme';
+// import styled from 'astroturf';
+import { css } from 'astroturf';
 
 const NavLink = ({ to, children }) => {
-  const linkStyle = css`
-    color: ${theme.colors.link};
-    font-family: ${theme.fonts.primary};
-    margin: 0 1rem;
-    text-decoration: none;
+  const styles = css`
+    @import '../theme.scss';
+    .linkStyle {
+      color: $colorLink;
+      font-family: $fontPrimary;
+      margin: 0 1rem;
+      text-decoration: none;
 
-    &:hover {
-      cursor: pointer;
-      text-decoration: underline;
-    }
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
 
-    &:visited {
-      color: ${theme.colors.linkVisited};
-    }
+      &:visited {
+        color: $colorLinkVisited;
+      }
 
-    @media (max-width: 768px) {
-      padding: 1rem 0;
+      @media (max-width: 768px) {
+        padding: 1rem 0;
+      }
     }
   `;
 
   return (
-    <Link to={to} prefetch="true" className={linkStyle}>
+    <Link to={to} prefetch="true" className={styles.linkStyle}>
       {children}
     </Link>
   );

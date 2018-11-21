@@ -1,12 +1,11 @@
 import React from 'react';
-import styled from 'react-emotion';
-import theme from '../theme';
+import styled from 'astroturf';
 
 const FeaturedItem = styled('img')`
-  border: 0.5rem ridge ${theme.colors.bars};
+  @import '../theme.scss';
+  border: 0.5rem ridge $colorBars;
   display: inline-block;
   flex-basis: 25%;
-  // height: 25vw;
   object-fit: contain;
   object-position: center;
 

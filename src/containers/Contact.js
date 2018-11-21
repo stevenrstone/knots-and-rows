@@ -15,7 +15,10 @@ export default () => (
         order? Let us know!
       </Paragraph>
       <Paragraph>
-        <StyledLink className={InlineLink} to="mailto:knots.and.rows@gmail.com">
+        <StyledLink
+          className={InlineLink.inlineLink}
+          to="mailto:knots.and.rows@gmail.com"
+        >
           knots.and.rows@gmail.com
         </StyledLink>
       </Paragraph>

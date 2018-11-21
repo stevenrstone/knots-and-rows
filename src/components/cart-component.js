@@ -2,36 +2,38 @@ import React, { Component } from 'react';
 // import Client from 'shopify-buy';
 // fetch is necessary for shopify
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
-import styled, { css } from 'react-emotion';
+import styled, { css } from 'astroturf';
 import CartListItem from './cart-list-item';
-import theme from '../theme';
 import linkStyle from './link-styling';
 
-const fixedBody = css`
-  @media (max-width: 768px) {
-    overflow: hidden;
-    position: relative;
+const styles = css`
+  .fixedBody {
+    @media (max-width: 768px) {
+      overflow: hidden;
+      position: relative;
 
-    &::after {
-      background: rgba(0, 0, 0, 0.5);
-      bottom: 0;
-      content: '';
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
+      &::after {
+        background: rgba(0, 0, 0, 0.5);
+        bottom: 0;
+        content: '';
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
     }
   }
 `;
 
 const CartContainer = styled('div')`
+  @import '../theme.scss';
   right: 2rem;
   position: absolute;
   top: 2rem;
 
   @media (max-width: 768px) {
-    background: ${theme.colors.background};
-    box-shadow: ${theme.styling.boxShadow};
+    background: $colorBackground;
+    box-shadow: $stylingBoxShadow;
     left: 0;
     padding: 1rem;
     position: fixed;
@@ -64,9 +66,10 @@ const CartButton = styled('button')`
 `;
 
 const StyledCart = styled('div')`
-  background: ${theme.colors.background};
-  border: 1px solid ${theme.colors.bars};
-  box-shadow: ${theme.styling.boxShadow};
+  @import '../theme.scss';
+  background: $colorBackground;
+  border: 1px solid $colorBars;
+  box-shadow: $stylingBoxShadow;
   box-sizing: border-box;
   min-height: 200px;
   max-height: 400px;
@@ -95,12 +98,13 @@ const CartItemList = styled('ol')`
 `;
 
 const CheckoutButton = styled('a')`
-  background-color: ${theme.colors.bars};
+  @import '../theme.scss';
+  background-color: $colorBars;
   border: none;
   color: buttontext;
   cursor: pointer;
   display: block;
-  font-family: ${theme.fonts.primary};
+  font-family: $fontPrimary;
   font-size: 1.2rem;
   font-weight: bold;
   padding: 1rem 0;
@@ -153,7 +157,7 @@ class Cart extends Component {
       });
       if (this.state.open && lineItems.length === 0) {
         if (typeof document !== 'undefined') {
-          document.body.classList.remove(fixedBody);
+          document.body.classList.remove(styles.fixedBody);
         }
       }
     }
@@ -202,9 +206,9 @@ class Cart extends Component {
       () => {
         if (this.state.open && typeof document !== 'undefined') {
           /* eslint-disable */
-          document.body.classList.contains(fixedBody)
-            ? document.body.classList.remove(fixedBody)
-            : document.body.classList.add(fixedBody);
+          document.body.classList.contains(styles.fixedBody)
+            ? document.body.classList.remove(styles.fixedBody)
+            : document.body.classList.add(styles.fixedBody);
           /* eslint-enable */
           const classThis = this;
           document.body.addEventListener('click', function outsideClick(evt) {
@@ -213,12 +217,12 @@ class Cart extends Component {
               classThis.setState({
                 open: false,
               });
-              document.body.classList.remove(fixedBody);
+              document.body.classList.remove(styles.fixedBody);
               document.body.removeEventListener('click', outsideClick);
             }
           });
         } else if (typeof document !== 'undefined') {
-          document.body.classList.remove(fixedBody);
+          document.body.classList.remove(styles.fixedBody);
         }
       },
     );
@@ -227,7 +231,8 @@ class Cart extends Component {
   render() {
     const renderSubtotal = () => {
       const SubtotalLine = styled('li')`
-        font-family: ${theme.fonts.primary};
+        @import '../theme.scss';
+        font-family: $fontPrimary;
         text-align: right;
       `;
       const subtotal = this.state.cart.reduce(

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouteData, Head } from 'react-static';
-import styled, { css } from 'react-emotion';
+import styled, { css } from 'astroturf';
 
 const StyledImageGallery = styled('div')`
   display: inline-flex;
@@ -43,17 +43,19 @@ const ImageTile = styled('img')`
   width: 100%;
 `;
 
-const inactiveImageTile = css`
-  cursor: pointer;
-  position: relative;
-  &::after {
-    background: rgba(255, 255, 255, 0.6);
-    bottom: 0;
-    content: '';
-    left: 0;
-    right: 0;
-    position: absolute;
-    top: 0;
+const styles = css`
+  .inactiveImageTile {
+    cursor: pointer;
+    position: relative;
+    &::after {
+      background: rgba(255, 255, 255, 0.6);
+      bottom: 0;
+      content: '';
+      left: 0;
+      right: 0;
+      position: absolute;
+      top: 0;
+    }
   }
 `;
 
@@ -69,7 +71,7 @@ export default class ImageGallery extends Component {
     const Tile = styled('div')`
       display: inline-block;
       max-height: 100%;
-      flex-basis: ${100 / this.props.images.length - this.props.images.length}%;
+      flex-basis: 25%;
       overflow: hidden;
     `;
 
@@ -96,7 +98,9 @@ export default class ImageGallery extends Component {
                 <Tile
                   onClick={() => updateSelectedImage(index)}
                   className={
-                    index !== this.state.selectedImage ? inactiveImageTile : ''
+                    index !== this.state.selectedImage
+                      ? styles.inactiveImageTile
+                      : ''
                   }
                   key={image.src}
                 >

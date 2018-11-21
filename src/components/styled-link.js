@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-static';
-import { css } from 'react-emotion';
+import { css } from 'astroturf';
 import linkStyle from './link-styling';
 
 const StyledLink = ({ to, children }) => (
@@ -10,8 +10,10 @@ const StyledLink = ({ to, children }) => (
 );
 
 const InlineLink = css`
-  display: inline;
-  margin: 0;
+  .inlineLink {
+    display: inline;
+    margin: 0;
+  }
 `;
 
 export { InlineLink };

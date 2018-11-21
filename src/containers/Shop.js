@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouteData, Head } from 'react-static';
-import styled, { css } from 'react-emotion';
+import styled, { css } from 'astroturf';
 // import theme from '../theme';
 // import Nav from '../components/nav';
 // import Afterbar from '../components/after-bar';
@@ -38,7 +38,7 @@ export default withRouteData(({ collection = [] }) => (
         ) : (
           <Paragraph>
             All of our {collection.title} are out of stock right now!{' '}
-            <StyledLink className={InlineLink} to="/contact">
+            <StyledLink className={InlineLink.inlineLink} to="/contact">
               You can let us know what you're looking for
             </StyledLink>
             , or try again later.

@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'react-emotion';
-import theme from '../theme';
+import styled from 'astroturf';
 import Afterbar from './after-bar';
 import Nav from './nav';
 import Cart from '../containers/cart-container';
@@ -20,8 +19,9 @@ const Header = styled('div')`
 `;
 
 const Title = styled('h1')`
-  color: ${theme.colors.copy};
-  font-family: ${theme.fonts.title};
+  @import '../theme.scss';
+  color: $colorCopy;
+  font-family: $fontTitle;
   margin: 0;
 `;
 

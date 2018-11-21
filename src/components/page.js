@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { SiteData } from 'react-static';
-import styled from 'react-emotion';
+import styled from 'astroturf';
 import Header from './header';
 import Footer from './footer';
-import theme from '../theme';
 
 const Container = styled('div')`
-  background: ${theme.colors.background};
+  @import '../theme.scss';
+  background: $colorBackground;
   width: 100%;
 `;
 

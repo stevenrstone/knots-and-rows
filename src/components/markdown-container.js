@@ -1,10 +1,10 @@
 import React from 'react'; // eslint-disable-line
-import styled from 'react-emotion';
-import theme from '../theme';
+import styled from 'astroturf';
 
 const MarkdownContainer = styled('div')`
-  color: ${theme.colors.copy};
-  font-family: ${theme.fonts.primary};
+  @import '../theme.scss';
+  color: $colorCopy;
+  font-family: $fontPrimary;
   padding: 1rem;
 
   img {

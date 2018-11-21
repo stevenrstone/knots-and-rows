@@ -91,4 +91,29 @@ export default {
       },
     ];
   },
+  webpack: (config, { defaultLoaders }) => {
+    config.module.rules = [
+      {
+        oneOf: [
+          // defaultLoaders.jsLoader,
+          {
+            test: /module\.scss$/,
+            use: ['style-loader', 'astroturf/css-loader', 'sass-loader'],
+          },
+          {
+            test: /\.jsx?$/,
+            use: [
+              'babel-loader',
+              {
+                loader: 'astroturf/loader',
+                options: { extension: '.module.scss' },
+              },
+            ],
+          },
+          defaultLoaders.fileLoader,
+        ],
+      },
+    ];
+    return config;
+  },
 };

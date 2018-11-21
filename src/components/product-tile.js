@@ -1,7 +1,6 @@
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import styled, { css } from 'astroturf';
 import FeaturedItem from './featured-item';
-import theme from '../theme';
 
 const StyledTile = styled('a')`
   bottom: 0;
@@ -38,8 +37,9 @@ const ProductsImage = styled(FeaturedItem)`
 `;
 
 const ProductTitle = styled('h3')`
-  color: ${theme.colors.link};
-  font-family: ${theme.fonts.primary};
+  @import '../theme.scss';
+  color: $colorLink;
+  font-family: $fontPrimary;
   font-size: 1.2rem;
 
   margin: 0.5rem 0;

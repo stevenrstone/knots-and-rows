@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import styled, { css } from 'react-emotion';
+import styled, { css } from 'astroturf';
 import LoadingSheep from './loading-sheep';
-import theme from '../theme';
 
 const Form = styled('form')`
   display: flex;
@@ -22,27 +21,32 @@ const InputField = styled('div')`
 `;
 
 const InputLabel = styled('label')`
-  color: ${theme.colors.copy};
-  font-family: ${theme.fonts.primary};
+  @import '../theme.scss';
+  color: $colorCopy;
+  font-family: $fontPrimary;
   font-size: 1rem;
   left: 0;
   position: absolute;
   top: 0;
 `;
 
-const inputClass = css`
-  box-sizing: border-box;
-  color: ${theme.colors.primary};
-  font-family: ${theme.fonts.primary};
-  height: 3.5rem;
-  padding: 1rem;
-  width: 100%;
+const styles = css`
+  @import '../theme.scss';
+  .inputClass {
+    box-sizing: border-box;
+    color: $colorCopy;
+    font-family: $fontPrimary;
+    height: 3.5rem;
+    padding: 1rem;
+    width: 100%;
+  }
 `;
 
 const AddToCart = styled('button')`
-  background-color: ${theme.colors.bars};
+  @import '../theme.scss';
+  background-color: $colorBars;
   border: none;
-  color: ${theme.colors.primary};
+  color: $colorCopy;
   cursor: pointer;
   display: block;
   font-size: 1.2rem;
@@ -127,7 +131,7 @@ export default class ProductForm extends Component {
           <InputField>
             <InputLabel htmlFor="weight">Weight</InputLabel>
             <select
-              className={inputClass}
+              className={styles.inputClass}
               name="weight"
               onChange={e => this.handleWeightChange(e)}
               disabled={product.variants.length === 1}
@@ -139,7 +143,7 @@ export default class ProductForm extends Component {
           <InputField>
             <InputLabel htmlFor="quantity">Quantity</InputLabel>
             <input
-              className={inputClass}
+              className={styles.inputClass}
               type="number"
               minimum="1"
               step="1"
