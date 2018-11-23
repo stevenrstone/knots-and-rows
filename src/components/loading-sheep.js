@@ -103,13 +103,13 @@ const LoadingText = styled('h3')`
 
 const renderWool = () => {
   const wools = [];
-  wools.push(<Wool style={{ top: '-10%', left: '-10%' }} />);
-  wools.push(<Wool style={{ top: '-10%', left: '40%' }} />);
-  wools.push(<Wool style={{ top: '40%', left: '-10%' }} />);
-  wools.push(<Wool style={{ top: '40%', left: '40%' }} />);
-  wools.push(<Wool style={{ top: '-15%', left: '20%' }} />);
-  wools.push(<Wool style={{ top: '20%', left: '-15%' }} />);
-  wools.push(<Wool style={{ top: '20%', left: '40%' }} />);
+  wools.push(<Wool key="0" style={{ top: '-10%', left: '-10%' }} />);
+  wools.push(<Wool key="1" style={{ top: '-10%', left: '40%' }} />);
+  wools.push(<Wool key="2" style={{ top: '40%', left: '-10%' }} />);
+  wools.push(<Wool key="3" style={{ top: '40%', left: '40%' }} />);
+  wools.push(<Wool key="4" style={{ top: '-15%', left: '20%' }} />);
+  wools.push(<Wool key="5" style={{ top: '20%', left: '-15%' }} />);
+  wools.push(<Wool key="6" style={{ top: '20%', left: '40%' }} />);
 
   return wools;
 };
