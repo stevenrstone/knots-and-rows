@@ -28,7 +28,9 @@
     "react-router": "^4.2.0",
     "react-static": "^5.9.8",
     "redux": "^4.0.1",
-    "shopify-buy": "^1.8.0"
+    "shopify-buy": "^1.8.0",
+    "sw-precache": "^5.2.1",
+    "sw-precache-webpack-plugin": "^0.11.5"
   },
   "devDependencies": {
     "eslint-config-react-tools": "^1.1.6",

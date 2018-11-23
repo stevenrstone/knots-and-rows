@@ -3,6 +3,7 @@ import Client from 'shopify-buy';
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
 import marked from 'marked';
 import fs from 'fs';
+import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
 import { sortCollections } from './content/collections';
 
 const shopifyClientInfo = {
@@ -90,5 +91,21 @@ export default {
         }),
       },
     ];
+  },
+  webpack: (config) => {
+    config.plugins.push(
+      new SWPrecacheWebpackPlugin({
+        cacheId: 'knots-and-rows',
+        filename: 'krsw.js',
+        minify: true,
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/cdn.shopify.com\//,
+            handler: 'cacheFirst',
+          },
+        ],
+      }),
+    );
+    return config;
   },
 };
