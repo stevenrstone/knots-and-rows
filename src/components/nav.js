@@ -51,7 +51,7 @@ export default withRouteData((props) => {
     <React.Fragment>
       <MobileMenuButton onClick={handleMobileMenuClick}>Menu</MobileMenuButton>
       <Nav>
-        <NavLink to="/">Home</NavLink>
+        {/* <NavLink to="/">Home</NavLink> */}
         <Dropdown
           title="Shop"
           container={typeof document !== 'undefined' ? document.body : null}
@@ -65,9 +65,9 @@ export default withRouteData((props) => {
         </Dropdown>
         <NavLink to="/frequently-asked-questions">FAQ</NavLink>
         <NavLink to="/about">About</NavLink>
-        {/* <StyledLink to="/patterns">Patterns</StyledLink>
-    <StyledLink to="/blog">Blog</StyledLink>
-    <StyledLink to="/contact">Contact</StyledLink> */}
+        <NavLink to="/patterns">Patterns</NavLink>
+        {/* <StyledLink to="/blog">Blog</StyledLink> */}
+        <NavLink to="/contact">Contact</NavLink>
       </Nav>
     </React.Fragment>
   );

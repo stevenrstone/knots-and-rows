@@ -25,8 +25,17 @@ const NavLink = ({ to, children }) => {
     }
   `;
 
+  const activeLink = css`
+    text-decoration: underline;
+  `;
+
   return (
-    <Link to={to} prefetch="true" className={linkStyle}>
+    <Link
+      to={to}
+      prefetch="true"
+      className={linkStyle}
+      activeClassName={activeLink}
+    >
       {children}
     </Link>
   );
