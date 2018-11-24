@@ -40,7 +40,7 @@ export default {
     collections.forEach((collection) => {
       productPaths.push({
         path: `/shop/${collection.handle}`,
-        component: 'src/containers/Shop',
+        component: 'src/Views/Shop',
         getData: () => ({
           collection, // necessary for the page render
           collections, // necessary for the nav
@@ -50,7 +50,7 @@ export default {
       collection.products.forEach((product) => {
         productPaths.push({
           path: `/shop/${collection.handle}/${product.handle}`,
-          component: 'src/containers/Product',
+          component: 'src/Views/Product',
           getData: () => ({
             product,
             collections,
@@ -63,7 +63,7 @@ export default {
     patterns.forEach((pattern, index) => {
       patternsPaths.push({
         path: `/patterns/${pattern.split('.')[0]}`,
-        component: 'src/containers/Pattern',
+        component: 'src/Views/Pattern',
         getData: () => ({
           collections,
           patternHtml: patternsHtml[index],
@@ -73,14 +73,14 @@ export default {
     return [
       {
         path: '/',
-        component: 'src/containers/Home',
+        component: 'src/Views/Home',
         getData: () => ({
           collections,
         }),
       },
       {
         path: '/frequently-asked-questions',
-        component: 'src/containers/FAQs',
+        component: 'src/Views/FAQs',
         getData: () => ({
           collections,
           faqsHtml,
@@ -88,7 +88,7 @@ export default {
       },
       {
         path: '/about',
-        component: 'src/containers/About',
+        component: 'src/Views/About',
         getData: () => ({
           collections,
           aboutHtml,
@@ -96,14 +96,14 @@ export default {
       },
       {
         path: '/contact',
-        component: 'src/containers/Contact',
+        component: 'src/Views/Contact',
         getData: () => ({
           collections,
         }),
       },
       {
         path: 'patterns',
-        component: 'src/containers/PatternList',
+        component: 'src/Views/PatternList',
         getData: () => ({
           collections,
           patterns,
@@ -113,7 +113,7 @@ export default {
       ...patternsPaths,
       {
         is404: true,
-        component: 'src/containers/404',
+        component: 'src/Views/404',
         getData: () => ({
           collections,
         }),
