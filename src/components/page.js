@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line
 import { SiteData } from 'react-static';
 import styled from 'react-emotion';
 import Header from './header';

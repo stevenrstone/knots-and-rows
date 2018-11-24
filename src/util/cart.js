@@ -27,7 +27,7 @@ const initCart = async (shopifyClientInfo) => {
         .length
     ) {
       const cartId = allCookies.replace(
-        /(?:(?:^|.*;\s*)KandRCartId\s*\=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)KandRCartId\s*=\s*([^;]*).*$)|^.*$/,
         '$1',
       );
       const cart = await client.checkout.fetch(cartId);

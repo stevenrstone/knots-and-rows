@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { withRouteData, Head } from 'react-static';
+import React, { Component } from 'react'; // eslint-disable-line
 import styled, { css } from 'react-emotion';
 
 const StyledImageGallery = styled('div')`

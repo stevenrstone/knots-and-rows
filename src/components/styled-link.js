@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line
 import { Link } from 'react-static';
 import { css } from 'react-emotion';
 import linkStyle from './link-styling';

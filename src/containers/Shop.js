@@ -1,9 +1,6 @@
 import React from 'react';
 import { withRouteData, Head } from 'react-static';
-import styled, { css } from 'react-emotion';
-// import theme from '../theme';
-// import Nav from '../components/nav';
-// import Afterbar from '../components/after-bar';
+import styled from 'react-emotion';
 import Page from '../components/page';
 import Paragraph from '../components/paragraph';
 import ProductTile from '../components/product-tile';

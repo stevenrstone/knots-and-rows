@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'react-emotion';
+import React from 'react'; // eslint-disable-line
+import styled from 'react-emotion';
 import FeaturedItem from './featured-item';
 import theme from '../theme';
 

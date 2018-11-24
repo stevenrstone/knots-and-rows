@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-// import Client from 'shopify-buy';
+import React, { Component } from 'react'; // eslint-disable-line
 // fetch is necessary for shopify
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
 import styled, { css } from 'react-emotion';
