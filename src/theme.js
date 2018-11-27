@@ -1,6 +1,6 @@
 const theme = {
   colors: {
-    background: 'white',
+    background: '#fffafa',
     backgroundImage: '#e1e5f2',
     bars: '#bfdbf7',
     copy: '#471951',

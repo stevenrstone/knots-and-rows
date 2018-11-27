@@ -8,6 +8,10 @@ export default () => (
   <React.Fragment>
     <Head>
       <title>{'Knots and Rows | Contact Us'}</title>
+      <meta
+        name="description"
+        content="Need to contact us at Knots and Rows?"
+      />
     </Head>
     <Page>
       <Paragraph>

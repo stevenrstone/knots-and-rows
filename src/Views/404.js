@@ -7,6 +7,10 @@ export default () => (
   <React.Fragment>
     <Head>
       <title>{'Knots and Rows | 404'}</title>
+      <meta
+        name="description"
+        content="Welcome to Knots and Rows! You found our 404 page."
+      />
     </Head>
     <Page>
       <Paragraph>

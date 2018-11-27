@@ -59,6 +59,12 @@ export default () => (
       <React.Fragment>
         <Head>
           <title>{`Knots and Rows | ${product ? product.title : ''}`}</title>
+          <meta
+            name="description"
+            content={`Premium, hand-crafted ${
+              product ? product.title : ''
+            } yarn from Knots and Rows - perfect for your next knitting or crocheting project`}
+          />
         </Head>
         <Page>
           <FlexParent>

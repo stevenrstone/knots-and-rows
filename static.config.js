@@ -32,8 +32,9 @@ export default {
     const aboutHtml = marked(aboutContent);
     const patternsHtml = patternsContent.map(item => marked(item));
 
+    const allProducts = {};
+    allProducts.products = [];
     const productPaths = [];
-    const featuredProductsArr = [];
     collections.forEach((collection) => {
       productPaths.push({
         path: `/shop/${collection.handle}`,
@@ -45,6 +46,10 @@ export default {
       });
 
       collection.products.forEach((product) => {
+        const productWithCollection = product;
+        productWithCollection.collection = collection.handle;
+        allProducts.products.push(productWithCollection);
+
         productPaths.push({
           path: `/shop/${collection.handle}/${product.handle}`,
           component: 'src/Views/Product',
@@ -53,14 +58,15 @@ export default {
             collections,
           }),
         });
-        if (featuredProducts.includes(product.title.toLowerCase())) {
-          featuredProductsArr.push({
-            url: `/shop/${collection.handle}/${product.handle}`,
-            imageUrl: product.images[0].src,
-            title: product.title,
-          });
-        }
       });
+    });
+    productPaths.push({
+      path: '/shop/all',
+      component: 'src/Views/Shop',
+      getData: () => ({
+        collection: allProducts,
+        collections,
+      }),
     });
 
     const patternsPaths = [];
@@ -80,7 +86,7 @@ export default {
         component: 'src/Views/Home',
         getData: () => ({
           collections,
-          featuredProducts: featuredProductsArr,
+          featuredProducts,
         }),
       },
       {

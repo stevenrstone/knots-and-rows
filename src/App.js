@@ -1,12 +1,14 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line
 import { Router, withSiteData } from 'react-static';
 import { hot } from 'react-hot-loader';
 import { css } from 'emotion';
-import Routes from 'react-static-routes';
+import Routes from 'react-static-routes'; // eslint-disable-line
+import theme from './theme';
 
 import initCart from './util/cart';
 
 const body = css`
+  background-color: ${theme.colors.background};
   margin: 0;
   padding: 0;
 `;

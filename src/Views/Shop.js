@@ -16,15 +16,23 @@ export default withRouteData(({ collection = [] }) => (
   <React.Fragment>
     <Head>
       <title>{`Knots and Rows | Premium Hand-dyed Yarn ${
-        collection ? ` | ${collection.title}` : ''
+        collection && collection.title ? ` | ${collection.title}` : ''
       }`}</title>
+      <meta
+        name="description"
+        content={`Premium, hand-crafted ${
+          collection && collection.title ? collection.title : ''
+        } from Knots and Rows`}
+      />
     </Head>
     <Page>
       <ProductFlex>
         {collection.products && collection.products.length > 0 ? (
           collection.products.map(product => (
             <ProductTile
-              url={`/shop/${collection.handle}/${product.handle}`}
+              url={`/shop/${collection.handle || product.collection}/${
+                product.handle
+              }`}
               img={product.images[0].src}
               alt={product.title}
               title={product.title}

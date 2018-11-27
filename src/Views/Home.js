@@ -27,11 +27,15 @@ export default withSiteData(({ title }) => (
       <React.Fragment>
         <Head>
           <title>{title} | Premium Hand-dyed Yarn</title>
+          <meta
+            name="description"
+            content="Knots and Rows, where each skein is hand-dyed to be unique and, like you, beautiful with love at its core."
+          />
         </Head>
         <Page>
           <FeaturedBlock>
             {featuredProducts.map(fp => (
-              <Link to={fp.url} key={fp.title} className={featuredLink}>
+              <Link to={fp.path} key={fp.title} className={featuredLink}>
                 <FeaturedItem
                   src={fp.imageUrl}
                   alt={fp.title}

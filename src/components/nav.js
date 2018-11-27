@@ -47,6 +47,14 @@ export default withRouteData((props) => {
     e.target.classList.toggle('jsa-mobile-nav-open');
   };
 
+  const navCollections = [
+    {
+      handle: 'all',
+      title: 'All',
+    },
+    ...props.collections,
+  ];
+
   return (
     <React.Fragment>
       <MobileMenuButton onClick={handleMobileMenuClick}>Menu</MobileMenuButton>
@@ -56,12 +64,11 @@ export default withRouteData((props) => {
           title="Shop"
           container={typeof document !== 'undefined' ? document.body : null}
         >
-          {props.collections
-            && props.collections.map(type => (
-              <NavLink to={`/shop/${type.handle}`} key={type.handle}>
-                {type.title}
-              </NavLink>
-            ))}
+          {navCollections.map(type => (
+            <NavLink to={`/shop/${type.handle}`} key={type.handle}>
+              {type.title}
+            </NavLink>
+          ))}
         </Dropdown>
         <NavLink to="/frequently-asked-questions">FAQ</NavLink>
         <NavLink to="/about">About</NavLink>
