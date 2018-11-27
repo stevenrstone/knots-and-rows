@@ -1,9 +1,11 @@
 import React from 'react';
-import { withSiteData, Head, RouteData } from 'react-static';
+import {
+  withSiteData, Head, RouteData, Link,
+} from 'react-static';
 import styled from 'react-emotion';
 import theme from '../theme';
 import Page from '../components/page';
-import FeaturedItem from '../components/featured-item';
+import FeaturedItem, { featuredLink } from '../components/featured-item';
 
 const FeaturedBlock = styled('div')`
   background-color: ${theme.colors.backgroundImage};
@@ -21,16 +23,22 @@ const FeaturedBlock = styled('div')`
 
 export default withSiteData(({ title }) => (
   <RouteData
-    render={() => (
+    render={({ featuredProducts }) => (
       <React.Fragment>
         <Head>
           <title>{title} | Premium Hand-dyed Yarn</title>
         </Head>
         <Page>
           <FeaturedBlock>
-            <FeaturedItem src="/gary.svg" alt="Featured Item" />
-            <FeaturedItem src="/gary.svg" alt="Featured Item" />
-            <FeaturedItem src="/gary.svg" alt="Featured Item" />
+            {featuredProducts.map(fp => (
+              <Link to={fp.url} key={fp.title} className={featuredLink}>
+                <FeaturedItem
+                  src={fp.imageUrl}
+                  alt={fp.title}
+                  title={fp.title}
+                />
+              </Link>
+            ))}
           </FeaturedBlock>
         </Page>
       </React.Fragment>

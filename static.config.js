@@ -5,6 +5,7 @@ import marked from 'marked';
 import fs from 'fs';
 import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
 import { sortCollections } from './content/collections';
+import featuredProducts from './content/featured-products';
 
 const shopifyClientInfo = {
   domain: 'knots-and-rows.myshopify.com',
@@ -13,13 +14,8 @@ const shopifyClientInfo = {
 
 const client = Client.buildClient(shopifyClientInfo);
 
-// fetch(faqsContent).then(response => response.text).then(text => )
 const faqsContent = fs.readFileSync('./content/faqs.md', 'utf8');
 const aboutContent = fs.readFileSync('./content/about.md', 'utf8');
-// const patternContent = fs.readFileSync(
-//   './content/patterns/every-soldier-of-love-needs-coffee.md',
-//   'utf8',
-// );
 const patterns = fs.readdirSync('./content/patterns/', 'utf8');
 const patternsContent = patterns.map(item => fs.readFileSync(`./content/patterns/${item}`, 'utf8'));
 
@@ -37,6 +33,7 @@ export default {
     const patternsHtml = patternsContent.map(item => marked(item));
 
     const productPaths = [];
+    const featuredProductsArr = [];
     collections.forEach((collection) => {
       productPaths.push({
         path: `/shop/${collection.handle}`,
@@ -56,6 +53,13 @@ export default {
             collections,
           }),
         });
+        if (featuredProducts.includes(product.title.toLowerCase())) {
+          featuredProductsArr.push({
+            url: `/shop/${collection.handle}/${product.handle}`,
+            imageUrl: product.images[0].src,
+            title: product.title,
+          });
+        }
       });
     });
 
@@ -76,6 +80,7 @@ export default {
         component: 'src/Views/Home',
         getData: () => ({
           collections,
+          featuredProducts: featuredProductsArr,
         }),
       },
       {
