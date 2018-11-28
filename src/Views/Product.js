@@ -5,6 +5,7 @@ import theme from '../theme';
 import Page from '../components/page';
 import ProductForm from '../containers/product-form-container';
 import ImageGallery from '../components/image-gallery';
+import { renderPrices } from '../util/products';
 
 import store from '../util/store';
 
@@ -42,16 +43,6 @@ const productDescription = css`
   color: ${theme.colors.primary};
   font-family: ${theme.fonts.primary};
 `;
-
-const renderPrices = (variants) => {
-  const allPrices = [];
-  variants.forEach(v => allPrices.push(v.price));
-  if (allPrices.length === 1) {
-    return `$${allPrices[0]}`;
-  }
-  allPrices.sort();
-  return `$${allPrices[0]} - $${allPrices[allPrices.length - 1]}`;
-};
 
 export default () => (
   <RouteData

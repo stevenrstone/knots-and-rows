@@ -20,6 +20,7 @@ const patterns = fs.readdirSync('./content/patterns/', 'utf8');
 const patternsContent = patterns.map(item => fs.readFileSync(`./content/patterns/${item}`, 'utf8'));
 
 export default {
+  siteRoot: 'https://knotsandrows.com',
   getSiteData: () => ({
     title: 'Knots and Rows',
     shopifyClientInfo,

@@ -5,6 +5,7 @@ import Page from '../components/page';
 import Paragraph from '../components/paragraph';
 import ProductTile from '../components/product-tile';
 import StyledLink, { InlineLink } from '../components/styled-link';
+import { renderPrices } from '../util/products';
 
 const ProductFlex = styled('div')`
   display: flex;
@@ -36,7 +37,7 @@ export default withRouteData(({ collection = [] }) => (
               img={product.images[0].src}
               alt={product.title}
               title={product.title}
-              price="$12-$20"
+              price={renderPrices(product.variants)}
               key={product.handle}
             />
           ))

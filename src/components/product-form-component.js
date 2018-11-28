@@ -58,7 +58,7 @@ const AddToCart = styled('button')`
   }
 `;
 
-const renderOptions = variants => variants.map(v => (v.available ? (
+const renderOptions = variants => variants.map(v => (v.available && v.title !== 'Default Title' ? (
       <option value={v.id} key={v.id}>{`${v.title} (${v.price})`}</option>
 ) : null));
 
@@ -88,6 +88,7 @@ export default class ProductForm extends Component {
 
   handleQuantityChange(e) {
     if (e.target.value < 1) e.target.value = 1;
+    if (e.target.value > 10) e.target.value = 10;
     this.setState({ quantity: parseInt(e.target.value, 10) });
   }
 
@@ -122,23 +123,26 @@ export default class ProductForm extends Component {
     return (
       <React.Fragment>
         <Form>
-          <InputField>
-            <InputLabel htmlFor="weight">Weight</InputLabel>
-            <select
-              className={inputClass}
-              name="weight"
-              onChange={e => this.handleWeightChange(e)}
-              disabled={product.variants.length === 1}
-            >
-              {renderOptions(product.variants)}
-            </select>
-          </InputField>
+          {!product.variants.some(v => v.title === 'Default Title') ? (
+            <InputField>
+              <InputLabel htmlFor="weight">Weight</InputLabel>
+              <select
+                className={inputClass}
+                name="weight"
+                onChange={e => this.handleWeightChange(e)}
+                disabled={product.variants.length === 1}
+              >
+                {renderOptions(product.variants)}
+              </select>
+            </InputField>
+          ) : null}
 
           <InputField>
             <InputLabel htmlFor="quantity">Quantity</InputLabel>
             <input
               className={inputClass}
               type="number"
+              maximum="10"
               minimum="1"
               step="1"
               name="quantity"
