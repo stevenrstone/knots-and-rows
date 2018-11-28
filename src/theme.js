@@ -8,7 +8,7 @@ const theme = {
     linkVisited: '#144e5a',
   },
   fonts: {
-    title: 'Comic Sans MS',
+    title: 'Trebuchet MS',
     primary: 'Century Gothic',
   },
   styling: {

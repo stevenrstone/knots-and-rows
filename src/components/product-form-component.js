@@ -58,20 +58,18 @@ const AddToCart = styled('button')`
   }
 `;
 
-const renderOptions = variants => variants.map(
-  v => (v.available ? (
-        <option value={v.id} key={v.id}>{`${v.title} (${v.price})`}</option>
-  ) : null),
-);
+const renderOptions = variants => variants.map(v => (v.available ? (
+      <option value={v.id} key={v.id}>{`${v.title} (${v.price})`}</option>
+) : null));
 
 export default class ProductForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartId: null,
+      cartId: props.store.getState().cartId || null,
       weight: this.props.product.variants[0].id,
       quantity: 1,
-      pending: true,
+      pending: !props.store.getState(),
     };
   }
 

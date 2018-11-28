@@ -112,8 +112,8 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartId: null,
-      cart: null,
+      cartId: props.store.getState().cartId || null,
+      cart: props.store.getState.cart || null,
       open: false,
     };
     this.initialStoreState = this.props.store.getState();
@@ -122,7 +122,6 @@ class Cart extends Component {
   setCart() {
     if (this.props.store) {
       const storeState = this.props.store.getState();
-      // console.log(storeState, this.state);
       this.setState({
         cartId: storeState.cartId,
         cart: storeState.lineItems,
@@ -133,7 +132,6 @@ class Cart extends Component {
   componentDidMount() {
     this.setCart();
     this.storeState = this.props.store.getState();
-    // console.log('cart mounting');
   }
 
   componentDidUpdate() {

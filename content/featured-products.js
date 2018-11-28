@@ -1,9 +1,8 @@
 const featuredProducts = [
   {
-    title: 'Ruby Rhapsody',
+    title: 'Rhapsody',
     imageUrl: '/featured-ruby-rhapsody.jpg',
-    path:
-      '/shop/handpaints/phoenix-rising-hand-dyed-yarn-fire-gradient-yarn-fingering-weight-shawl-yarn-sock-yarn-dk-yarn',
+    path: '/shop/speckles/rhapsody',
   },
   {
     title: 'Phoenix Rising',

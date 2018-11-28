@@ -33,7 +33,6 @@ export default ({ title }) => (
       </a>
       <Title>{title}</Title>
       <Nav />
-      {/* {console.log(cart.then(data => console.log(data)))} */}
       <Cart store={store} />
     </Header>
     <Afterbar />
