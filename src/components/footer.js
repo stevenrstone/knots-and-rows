@@ -5,6 +5,7 @@ import theme from '../theme';
 
 const LegalCopy = styled('p')`
   color: ${theme.colors.copy};
+  font-family: ${theme.fonts.primary};
   margin: 1rem auto;
   max-width: 80%;
 `;
