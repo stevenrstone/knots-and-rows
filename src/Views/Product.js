@@ -56,6 +56,10 @@ export default () => (
               product ? product.title : ''
             } yarn from Knots and Rows - perfect for your next knitting or crocheting project`}
           />
+          <meta
+            name="og:image"
+            content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+          />
         </Head>
         <Page>
           <FlexParent>

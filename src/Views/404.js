@@ -11,6 +11,10 @@ export default () => (
         name="description"
         content="Welcome to Knots and Rows! You found our 404 page."
       />
+      <meta
+        name="og:image"
+        content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+      />
     </Head>
     <Page>
       <Paragraph>

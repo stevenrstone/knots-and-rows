@@ -8,6 +8,10 @@ export default withRouteData(({ aboutHtml }) => (
     <Head>
       <title>{'Knots and Rows | About'}</title>
       <meta name="description" content="Learn more about Knots and Rows!" />
+      <meta
+        name="og:image"
+        content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+      />
     </Head>
     <Page>
       <MarkdownContainer dangerouslySetInnerHTML={{ __html: aboutHtml }} />

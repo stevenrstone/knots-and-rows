@@ -25,6 +25,10 @@ export default withRouteData(({ collection = [] }) => (
           collection && collection.title ? collection.title : ''
         } from Knots and Rows`}
       />
+      <meta
+        name="og:image"
+        content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+      />
     </Head>
     <Page>
       <ProductFlex>

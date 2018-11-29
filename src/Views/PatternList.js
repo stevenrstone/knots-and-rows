@@ -11,6 +11,10 @@ export default withRouteData(({ patterns }) => (
         name="description"
         content="Free knitting and crocheting patterns from Knots and Rows"
       />
+      <meta
+        name="og:image"
+        content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+      />
     </Head>
     <Page>
       <ul>

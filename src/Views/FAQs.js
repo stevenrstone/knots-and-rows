@@ -11,6 +11,10 @@ export default withRouteData(({ faqsHtml }) => (
         name="description"
         content="What dyes do we use? How do we wash our yarn? Can we cake your yarn? When will your yarn ship? Find these answers here."
       />
+      <meta
+        name="og:image"
+        content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+      />
     </Head>
     <Page>
       <MarkdownContainer dangerouslySetInnerHTML={{ __html: faqsHtml }} />

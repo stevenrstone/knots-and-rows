@@ -12,6 +12,10 @@ export default () => (
         name="description"
         content="Need to contact us at Knots and Rows?"
       />
+      <meta
+        name="og:image"
+        content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+      />
     </Head>
     <Page>
       <Paragraph>
