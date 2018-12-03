@@ -9,7 +9,7 @@ const theme = {
   },
   fonts: {
     title: 'Trebuchet MS',
-    primary: 'Century Gothic',
+    primary: '"Century Gothic", sans-serif',
   },
   styling: {
     boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.2);',

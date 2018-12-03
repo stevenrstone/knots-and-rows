@@ -1,3 +1,4 @@
+import React from 'react'; // eslint-disable-line
 import Client from 'shopify-buy';
 // fetch is necessary for shopify
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
@@ -20,7 +21,44 @@ const patterns = fs.readdirSync('./content/patterns/', 'utf8');
 const patternsContent = patterns.map(item => fs.readFileSync(`./content/patterns/${item}`, 'utf8'));
 
 export default {
+  Document: ({
+    Html, Head, Body, children,
+  }) => (
+    <Html lang="en-US">
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#9f00a7" />
+        <meta name="theme-color" content="#fffafa" />
+        <meta
+          name="og:image"
+          content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+        />
+      </Head>
+      <Body>{children}</Body>
+    </Html>
+  ),
   siteRoot: 'https://knotsandrows.com',
+  stagingSiteRoot: 'http://localhost:3000',
   getSiteData: () => ({
     title: 'Knots and Rows',
     shopifyClientInfo,

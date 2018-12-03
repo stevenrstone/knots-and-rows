@@ -29,7 +29,7 @@ export default withSiteData(({ title }) => (
           <title>{title} | Premium Hand-dyed Yarn</title>
           <meta
             name="description"
-            content="Knots and Rows, where each skein is hand-dyed to be unique and, like you, beautiful with love at its core."
+            content="Knots and Rows, where each skein is hand-dyed to be unique and, like you, beautiful with love at its core. Based in Kansas City."
           />
           <meta
             name="og:image"

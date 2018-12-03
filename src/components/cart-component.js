@@ -44,6 +44,7 @@ const CartContainer = styled('div')`
 const CartButton = styled('button')`
   background: transparent;
   border: none;
+  font-size: 1rem;
 
   &[disabled] {
     cursor: not-allowed;
