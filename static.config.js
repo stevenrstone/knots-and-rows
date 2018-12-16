@@ -58,7 +58,6 @@ export default {
     </Html>
   ),
   siteRoot: 'https://knotsandrows.com',
-  stagingSiteRoot: 'http://localhost:3000',
   getSiteData: () => ({
     title: 'Knots and Rows',
     shopifyClientInfo,

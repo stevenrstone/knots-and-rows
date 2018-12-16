@@ -113,41 +113,35 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartId: props.store.getState().cartId || null,
-      cart: props.store.getState.cart || null,
+      cartId: props.cartId || null,
+      lineItems: props.lineItems || null,
       open: false,
     };
     this.initialStoreState = this.props.store.getState();
   }
 
   setCart() {
-    if (this.props.store) {
-      const storeState = this.props.store.getState();
+    if (this.props.cartId) {
       this.setState({
-        cartId: storeState.cartId,
-        cart: storeState.lineItems,
+        cartId: this.props.cartId,
+        lineItems: this.props.lineItems,
       });
     }
   }
 
   componentDidMount() {
     this.setCart();
-    this.storeState = this.props.store.getState();
   }
 
   componentDidUpdate() {
-    const { cartId } = this.props.store.getState();
-    if (
-      this.state.cartId !== cartId
-      && cartId !== undefined
-      && this.initialStoreState.cartId !== cartId
-    ) {
+    const { cartId } = this.props;
+    if (this.state.cartId !== cartId && cartId !== undefined) {
       this.setCart();
     }
     const { lineItems } = this.props.store.getState();
-    if (this.state.cart !== lineItems) {
+    if (this.state.lineItems !== lineItems) {
       this.setState({
-        cart: lineItems,
+        lineItems,
       });
       if (this.state.open && lineItems.length === 0) {
         if (typeof document !== 'undefined') {
@@ -159,7 +153,7 @@ class Cart extends Component {
 
   handleQuantityChange = (quantity, item) => {
     const checkoutId = this.state.cartId;
-    const { client } = this.props.store.getState();
+    const { client } = this.props;
     const lineItemsToUpdate = [
       {
         id: item.id,
@@ -179,7 +173,7 @@ class Cart extends Component {
 
   handleRemoveItem = (item) => {
     const checkoutId = this.state.cartId;
-    const { client } = this.props.store.getState();
+    const { client } = this.props;
     const lineItemsToRemove = [item.id];
 
     client.checkout
@@ -228,14 +222,14 @@ class Cart extends Component {
         font-family: ${theme.fonts.primary};
         text-align: right;
       `;
-      const subtotal = this.state.cart.reduce(
+      const subtotal = this.state.lineItems.reduce(
         (acc, item) => acc + item.quantity * parseFloat(item.variant.price, 10),
         0,
       );
       return <SubtotalLine>Subtotal: ${subtotal}</SubtotalLine>;
     };
 
-    if (this.state.cart && this.state.cart.length) {
+    if (this.state.lineItems && this.state.lineItems.length) {
       return (
         <CartContainer className="js-cart">
           <CartButton
@@ -243,12 +237,12 @@ class Cart extends Component {
             type="button"
             onClick={this.handleCartToggle}
           >
-            Cart ({this.state.cart.length} items)
+            Cart ({this.state.lineItems.length} items)
           </CartButton>
           {this.state.open ? (
             <StyledCart>
               <CartItemList>
-                {this.state.cart.map(item => (
+                {this.state.lineItems.map(item => (
                   <CartListItem
                     key={item.title}
                     item={item}
@@ -258,7 +252,7 @@ class Cart extends Component {
                 ))}
                 {renderSubtotal()}
               </CartItemList>
-              <CheckoutButton href={this.props.store.getState().url}>
+              <CheckoutButton href={this.props.url}>
                 Proceed to Checkout
               </CheckoutButton>
             </StyledCart>
@@ -266,7 +260,10 @@ class Cart extends Component {
         </CartContainer>
       );
     }
-    if (this.state.cart && !this.state.cart.length) {
+    if (
+      (this.state.lineItems && !this.state.lineItems.length)
+      || this.state.cartId
+    ) {
       return (
         <CartContainer>
           <CartButton className={linkStyle} type="button" disabled>

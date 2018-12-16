@@ -18,7 +18,6 @@ const cartReducer = (state = {}, action) => {
     default:
       break;
   }
-
   return newState;
 };
 
