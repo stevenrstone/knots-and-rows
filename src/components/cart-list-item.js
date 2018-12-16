@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line
+import { Link } from 'react-static';
 import styled from 'react-emotion';
 import theme from '../theme';
 
@@ -52,9 +53,17 @@ const RemoveSymbol = styled('span')`
   width: 1rem;
 `;
 
-const CartListItem = ({ item, handleQuantityChange, handleRemoveItem }) => (
+const CartListItem = ({
+  item,
+  handleQuantityChange,
+  handleRemoveItem,
+  productUrlMap,
+}) => (
   <StyledCartListItem>
-    <img className="image" src={item.variant.image.src} alt={item.title} />
+    {console.log(productUrlMap)}
+    <Link to={productUrlMap.get(item.id)}>
+      <img className="image" src={item.variant.image.src} alt={item.title} />
+    </Link>
     <span className="title">
       {item.title}
       <br />({item.variant.title})

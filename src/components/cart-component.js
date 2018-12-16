@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; // eslint-disable-line
+import { SiteData } from 'react-static';
 // fetch is necessary for shopify
 import fetch from 'isomorphic-fetch'; // eslint-disable-line
 import styled, { css } from 'react-emotion';
@@ -231,7 +232,9 @@ class Cart extends Component {
 
     if (this.state.lineItems && this.state.lineItems.length) {
       return (
-        <CartContainer className="js-cart">
+        <SiteData render={({ productUrlMap }) => (
+          <CartContainer className="js-cart">
+          {console.log(productUrlMap)}
           <CartButton
             className={linkStyle}
             type="button"
@@ -248,6 +251,7 @@ class Cart extends Component {
                     item={item}
                     handleQuantityChange={this.handleQuantityChange}
                     handleRemoveItem={this.handleRemoveItem}
+                    productUrlMap={productUrlMap}
                   />
                 ))}
                 {renderSubtotal()}
@@ -258,6 +262,8 @@ class Cart extends Component {
             </StyledCart>
           ) : null}
         </CartContainer>
+        )} />
+        
       );
     }
     if (

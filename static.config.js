@@ -20,6 +20,19 @@ const aboutContent = fs.readFileSync('./content/about.md', 'utf8');
 const patterns = fs.readdirSync('./content/patterns/', 'utf8');
 const patternsContent = patterns.map(item => fs.readFileSync(`./content/patterns/${item}`, 'utf8'));
 
+const allProducts = {};
+allProducts.products = [];
+const productPaths = [];
+const productUrlMap = new Map();
+
+const getCollections = async () => {
+  const collections = sortCollections(
+    await client.collection.fetchAllWithProducts(),
+  );
+
+  return collections;
+};
+
 export default {
   Document: ({
     Html, Head, Body, children,
@@ -58,28 +71,15 @@ export default {
     </Html>
   ),
   siteRoot: 'https://knotsandrows.com',
-  getSiteData: () => ({
-    title: 'Knots and Rows',
-    shopifyClientInfo,
-  }),
-  getRoutes: async () => {
-    const collections = sortCollections(
-      await client.collection.fetchAllWithProducts(),
-    );
-    const faqsHtml = marked(faqsContent);
-    const aboutHtml = marked(aboutContent);
-    const patternsHtml = patternsContent.map(item => marked(item));
+  getSiteData: async () => {
+    const collections = await getCollections();
 
-    const allProducts = {};
-    allProducts.products = [];
-    const productPaths = [];
     collections.forEach((collection) => {
       productPaths.push({
         path: `/shop/${collection.handle}`,
         component: 'src/Views/Shop',
         getData: () => ({
           collection, // necessary for the page render
-          collections, // necessary for the nav
         }),
       });
 
@@ -96,14 +96,32 @@ export default {
             collections,
           }),
         });
+        productUrlMap.set(
+          product.id,
+          `/shop/${collection.handle}/${product.handle}`,
+        );
       });
     });
+
+    console.log(typeof productUrlMap);
+
+    return {
+      title: 'Knots and Rows',
+      shopifyClientInfo,
+      collections,
+      productUrlMap,
+    };
+  },
+  getRoutes: async () => {
+    const faqsHtml = marked(faqsContent);
+    const aboutHtml = marked(aboutContent);
+    const patternsHtml = patternsContent.map(item => marked(item));
+
     productPaths.push({
       path: '/shop/all',
       component: 'src/Views/Shop',
       getData: () => ({
         collection: allProducts,
-        collections,
       }),
     });
 
@@ -113,7 +131,6 @@ export default {
         path: `/patterns/${pattern.split('.')[0]}`,
         component: 'src/Views/Pattern',
         getData: () => ({
-          collections,
           patternHtml: patternsHtml[index],
         }),
       });
@@ -123,7 +140,6 @@ export default {
         path: '/',
         component: 'src/Views/Home',
         getData: () => ({
-          collections,
           featuredProducts,
         }),
       },
@@ -131,7 +147,6 @@ export default {
         path: '/frequently-asked-questions',
         component: 'src/Views/FAQs',
         getData: () => ({
-          collections,
           faqsHtml,
         }),
       },
@@ -139,22 +154,17 @@ export default {
         path: '/about',
         component: 'src/Views/About',
         getData: () => ({
-          collections,
           aboutHtml,
         }),
       },
       {
         path: '/contact',
         component: 'src/Views/Contact',
-        getData: () => ({
-          collections,
-        }),
       },
       {
         path: 'patterns',
         component: 'src/Views/PatternList',
         getData: () => ({
-          collections,
           patterns,
         }),
       },
@@ -163,9 +173,6 @@ export default {
       {
         is404: true,
         component: 'src/Views/404',
-        getData: () => ({
-          collections,
-        }),
       },
     ];
   },

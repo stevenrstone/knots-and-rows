@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouteData } from 'react-static';
+import { withSiteData } from 'react-static';
 import styled from 'react-emotion';
 import Dropdown from './dropdown';
 import NavLink from './nav-link';
@@ -42,7 +42,7 @@ const MobileMenuButton = styled('button')`
   }
 `;
 
-export default withRouteData((props) => {
+export default withSiteData((props) => {
   const handleMobileMenuClick = (e) => {
     e.target.classList.toggle('jsa-mobile-nav-open');
   };
@@ -59,7 +59,6 @@ export default withRouteData((props) => {
     <React.Fragment>
       <MobileMenuButton onClick={handleMobileMenuClick}>Menu</MobileMenuButton>
       <Nav>
-        {/* <NavLink to="/">Home</NavLink> */}
         <Dropdown
           title="Shop"
           container={typeof document !== 'undefined' ? document.body : null}
@@ -73,7 +72,6 @@ export default withRouteData((props) => {
         <NavLink to="/frequently-asked-questions">FAQ</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/patterns">Patterns</NavLink>
-        {/* <StyledLink to="/blog">Blog</StyledLink> */}
         <NavLink to="/contact">Contact</NavLink>
       </Nav>
     </React.Fragment>
