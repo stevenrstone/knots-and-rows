@@ -118,7 +118,7 @@ class Cart extends Component {
       lineItems: props.lineItems || null,
       open: false,
     };
-    this.initialStoreState = this.props.store.getState();
+    this.docEvent = null;
   }
 
   setCart() {
@@ -139,7 +139,7 @@ class Cart extends Component {
     if (this.state.cartId !== cartId && cartId !== undefined) {
       this.setCart();
     }
-    const { lineItems } = this.props.store.getState();
+    const { lineItems } = this.props;
     if (this.state.lineItems !== lineItems) {
       this.setState({
         lineItems,
@@ -149,6 +149,13 @@ class Cart extends Component {
           document.body.classList.remove(fixedBody);
         }
       }
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  componentWillUnmount() {
+    if (typeof document !== 'undefined' && this.docEvent) {
+      document.removeEventListener('click', this.docEvent);
     }
   }
 
@@ -200,9 +207,15 @@ class Cart extends Component {
             : document.body.classList.add(fixedBody);
           /* eslint-enable */
           const classThis = this;
+          // there's probably a better way to handle this
           document.body.addEventListener('click', function outsideClick(evt) {
             const etgt = evt.target;
-            if (etgt.closest('.js-cart') === null) {
+            // need to make this func reference so we can remove the event on unmount
+            this.docEvent = outsideClick;
+            if (
+              etgt.closest('.js-cart') === null
+              || etgt.className === 'image'
+            ) {
               classThis.setState({
                 open: false,
               });
@@ -232,38 +245,38 @@ class Cart extends Component {
 
     if (this.state.lineItems && this.state.lineItems.length) {
       return (
-        <SiteData render={({ productUrlMap }) => (
-          <CartContainer className="js-cart">
-          {console.log(productUrlMap)}
-          <CartButton
-            className={linkStyle}
-            type="button"
-            onClick={this.handleCartToggle}
-          >
-            Cart ({this.state.lineItems.length} items)
-          </CartButton>
-          {this.state.open ? (
-            <StyledCart>
-              <CartItemList>
-                {this.state.lineItems.map(item => (
-                  <CartListItem
-                    key={item.title}
-                    item={item}
-                    handleQuantityChange={this.handleQuantityChange}
-                    handleRemoveItem={this.handleRemoveItem}
-                    productUrlMap={productUrlMap}
-                  />
-                ))}
-                {renderSubtotal()}
-              </CartItemList>
-              <CheckoutButton href={this.props.url}>
-                Proceed to Checkout
-              </CheckoutButton>
-            </StyledCart>
-          ) : null}
-        </CartContainer>
-        )} />
-        
+        <SiteData
+          render={({ allProducts }) => (
+            <CartContainer className="js-cart">
+              <CartButton
+                className={linkStyle}
+                type="button"
+                onClick={this.handleCartToggle}
+              >
+                Cart ({this.state.lineItems.length} items)
+              </CartButton>
+              {this.state.open ? (
+                <StyledCart>
+                  <CartItemList>
+                    {this.state.lineItems.map(item => (
+                      <CartListItem
+                        key={item.title}
+                        item={item}
+                        handleQuantityChange={this.handleQuantityChange}
+                        handleRemoveItem={this.handleRemoveItem}
+                        allProducts={allProducts}
+                      />
+                    ))}
+                    {renderSubtotal()}
+                  </CartItemList>
+                  <CheckoutButton href={this.props.url}>
+                    Proceed to Checkout
+                  </CheckoutButton>
+                </StyledCart>
+              ) : null}
+            </CartContainer>
+          )}
+        />
       );
     }
     if (

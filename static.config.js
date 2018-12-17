@@ -20,11 +20,6 @@ const aboutContent = fs.readFileSync('./content/about.md', 'utf8');
 const patterns = fs.readdirSync('./content/patterns/', 'utf8');
 const patternsContent = patterns.map(item => fs.readFileSync(`./content/patterns/${item}`, 'utf8'));
 
-const allProducts = {};
-allProducts.products = [];
-const productPaths = [];
-const productUrlMap = new Map();
-
 const getCollections = async () => {
   const collections = sortCollections(
     await client.collection.fetchAllWithProducts(),
@@ -70,16 +65,46 @@ export default {
       <Body>{children}</Body>
     </Html>
   ),
-  siteRoot: 'https://knotsandrows.com',
+  // siteRoot: 'https://knotsandrows.com',
   getSiteData: async () => {
     const collections = await getCollections();
+    const allProducts = {};
+    allProducts.products = [];
+
+    collections.forEach((collection) => {
+      collection.products.forEach((product) => {
+        const productWithCollection = product;
+        productWithCollection.collection = collection.handle;
+        allProducts.products.push(productWithCollection);
+      });
+    });
+
+    return {
+      title: 'Knots and Rows',
+      shopifyClientInfo,
+      collections,
+      allProducts,
+    };
+  },
+  getRoutes: async () => {
+    const faqsHtml = marked(faqsContent);
+    const aboutHtml = marked(aboutContent);
+    const patternsHtml = patternsContent.map(item => marked(item));
+
+    const collections = await getCollections();
+    const productPaths = [];
+
+    // unfortunately, I think allProducts needs to be populated in both sitedata (for the cart)
+    // and routedata (for /shop/all), since the functions are async. At least it's in the build step and not on the client.
+    const allProducts = {};
+    allProducts.products = [];
 
     collections.forEach((collection) => {
       productPaths.push({
         path: `/shop/${collection.handle}`,
         component: 'src/Views/Shop',
         getData: () => ({
-          collection, // necessary for the page render
+          collection,
         }),
       });
 
@@ -96,26 +121,8 @@ export default {
             collections,
           }),
         });
-        productUrlMap.set(
-          product.id,
-          `/shop/${collection.handle}/${product.handle}`,
-        );
       });
     });
-
-    console.log(typeof productUrlMap);
-
-    return {
-      title: 'Knots and Rows',
-      shopifyClientInfo,
-      collections,
-      productUrlMap,
-    };
-  },
-  getRoutes: async () => {
-    const faqsHtml = marked(faqsContent);
-    const aboutHtml = marked(aboutContent);
-    const patternsHtml = patternsContent.map(item => marked(item));
 
     productPaths.push({
       path: '/shop/all',

@@ -13,8 +13,9 @@ const StyledCartListItem = styled('li')`
   width: 100%;
 
   .image {
-    max-height: 100%;
-    max-width: 20%;
+    display: inline-block;
+    height: 95%;
+    max-width: 100%;
   }
 
   .title {
@@ -53,15 +54,22 @@ const RemoveSymbol = styled('span')`
   width: 1rem;
 `;
 
+const generateProductLink = (allProducts, item) => {
+  const thisProduct = allProducts.products.filter(
+    product => product.title === item.title,
+  );
+  const url = `/shop/${thisProduct[0].collection}/${thisProduct[0].handle}`;
+  return url;
+};
+
 const CartListItem = ({
   item,
   handleQuantityChange,
   handleRemoveItem,
-  productUrlMap,
+  allProducts,
 }) => (
   <StyledCartListItem>
-    {console.log(productUrlMap)}
-    <Link to={productUrlMap.get(item.id)}>
+    <Link to={generateProductLink(allProducts, item)} className="image">
       <img className="image" src={item.variant.image.src} alt={item.title} />
     </Link>
     <span className="title">
