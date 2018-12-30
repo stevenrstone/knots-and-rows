@@ -66,7 +66,7 @@ export default class ProductForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartId: props.store.getState().cartId || null,
+      cartId: props.cartId || null,
       weight: this.props.product.variants[0].id,
       quantity: 1,
       pending: !props.store.getState(),
@@ -74,9 +74,9 @@ export default class ProductForm extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.cartId && this.props.store.getState().cartId) {
+    if (!this.state.cartId && this.props.cartId) {
       this.setState({
-        cartId: this.props.store.getState().cartId,
+        cartId: this.props.cartId,
         pending: false,
       });
     }
@@ -103,9 +103,7 @@ export default class ProductForm extends Component {
       quantity: this.state.quantity,
     };
 
-    this.props.store
-      .getState()
-      .client.checkout.addLineItems(this.state.cartId, lineItemsToAdd)
+    this.props.client.checkout.addLineItems(this.state.cartId, lineItemsToAdd)
       .then((newCheckout) => {
         this.props.store.dispatch({
           type: 'UPDATE_LINE_ITEMS',
