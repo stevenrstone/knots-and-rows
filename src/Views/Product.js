@@ -58,7 +58,7 @@ export default () => (
           />
           <meta
             name="og:image"
-            content="https://knotsandrows.com/featured-phoenix-rising.jpg"
+            content={`${product.images[0].src}`}
           />
         </Head>
         <Page>

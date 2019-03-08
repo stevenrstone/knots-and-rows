@@ -1,20 +1,19 @@
 const featuredProducts = [
   {
-    title: 'Rhapsody',
-    imageUrl: '/featured-ruby-rhapsody.jpg',
-    path: '/shop/speckles/rhapsody',
+    title: 'Mother Nature',
+    imageUrl: '/featured-mother-nature.jpg',
+    path:
+      '/shop/speckles/mother-nature-hand-dyed-yarn-speckled-yarn-fingering-weight-shawl-yarn-sock-yarn-dk-yarn',
   },
   {
-    title: 'Phoenix Rising',
-    imageUrl: '/featured-phoenix-rising.jpg',
-    path:
-      '/shop/handpaints/phoenix-rising-hand-dyed-yarn-fire-gradient-yarn-fingering-weight-shawl-yarn-sock-yarn-dk-yarn',
+    title: 'Buttercream',
+    imageUrl: '/featured-buttercream.jpg',
+    path: '/shop/speckles/buttercream',
   },
   {
-    title: "Mermaid's Haven",
-    imageUrl: '/featured-mermaids-haven.jpg',
-    path:
-      '/shop/speckles/mermaids-haven-hand-dyed-yarn-speckle-yarn-fingering-weight-shawl-yarn-sock-yarn-aran-yarn-fantasy-yarn',
+    title: 'Shamrock',
+    imageUrl: '/featured-shamrock.jpg',
+    path: '/shop/tonals/shamrock',
   },
 ];
 

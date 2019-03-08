@@ -16,14 +16,6 @@ const StyledImageGallery = styled('div')`
   }
 `;
 
-const HeroImage = styled('img')`
-  display: inline-block;
-  height: 65%;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center;
-`;
-
 const TileContainer = styled('div')`
   align-items: center;
   display: flex;
@@ -31,6 +23,11 @@ const TileContainer = styled('div')`
   justify-content: space-between;
   margin-top: 1rem;
   max-width: 100%;
+
+  &:empty {
+    height: 0;
+    margin: 0;
+  }
 `;
 
 const ImageTile = styled('img')`
@@ -65,6 +62,18 @@ export default class ImageGallery extends Component {
   }
 
   render() {
+    const HeroImage = styled('img')`
+      display: inline-block;
+      height: 65%;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: center;
+
+      @media (max-width: 768px) {
+        height: ${this.props.images.length > 1 ? '65%' : '100%'};
+      }
+    `;
+
     const Tile = styled('div')`
       display: inline-block;
       max-height: 100%;
