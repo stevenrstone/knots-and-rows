@@ -1,8 +1,9 @@
 const collectionsOrder = [
-  'Speckles',
-  'Tonals',
+  'Cotton',
   'Handpaints',
   'Lumos',
+  'Speckles',
+  'Tonals',
   'Accessories',
   'Prints',
 ];
